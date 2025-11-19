@@ -12,15 +12,17 @@ Celem projektu jest stworzenie "pożyczalni" prywatnych samochodów. Czyli aplik
 
 ### Podstawowe funkcjonalności
 
-- Tworzenie kont
+- Tworzenie kont użytkowników
+- Opcjonale logowanie kontem Google
 - Wstawianie ofert wynajmu swoich własnych samochodów
-- Akceptowanie ofert innych użytkowników
+- Wysyłanie próśb o możliwość wynajmu samochodu na określony przedział czasu, w odpowiedzi na ogłoszenie
+- Akceptowanie próśb wynajmu przez wystawiającego ogłoszenie
 
 ### Funkcjonalności dodatkowe
 
 - Wystawianie ocen użytkownikom
-- System reputacji
-- System potwierdzania tożsamości
+- System reputacji - użytkownik ma przypisane punkty reputacji, które są wyliczane na podstawie ocen użytkowników
+- System potwierdzania tożsamości - przesyłanie skanu dokumentu do centrali, w celu zmienienia statusu użytkownika na "zweryfikowany"
 
 ## Technologie
 
