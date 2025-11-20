@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class Home {
 
-    // Inject application name from application.properties
+    // Inject application name from application.yaml
     @Value("${spring.application.name}")
     private String appName;
 
