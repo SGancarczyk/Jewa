@@ -15,8 +15,13 @@ This document explains how to set up the **MySQL database** for the JEWA project
 ## 2. Prepare the database
 
 1. Open MySQL Workbench
-1. Execute SQL script `database\jevadb.sql` to create database jevadb.
-2. Create the `users` table with example data using SQL script `database\users.sql`.
+1. Execute following SQL command:
+
+```sql
+CREATE DATABASE IF NOT EXISTS jewadb
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+```
 
 ---
 
@@ -26,12 +31,12 @@ Set environment variables (Windows):
 
 ```powershell
 # PowerShell
-$env:DB_USER="jewa_user"
-$env:DB_PASS="your_password"
+$env:DB_USER="db_user"
+$env:DB_PASS="password"
 
 # CMD
-set DB_USER=jewa_user
-set DB_PASS=your_password
+set DB_USER=db_user
+set DB_PASS=password
 ```
 
 You can also do this via Windows environment variable setting:
@@ -51,14 +56,13 @@ You can also do this via Windows environment variable setting:
 1. Start the Spring Boot application:
 
 ```bash
-cd jewa
 mvn spring-boot:run
 ```
 
 2. Access the users page in your browser:
 
 ```
-http://localhost:8080/
+http://localhost:8080/users
 ```
 
 ---
