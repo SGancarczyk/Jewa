@@ -1,5 +1,9 @@
 # MySQL Database
 spring:
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:database_init/dummy_users.sql
   application:
     name: jewa
 
@@ -9,10 +13,11 @@ spring:
     password: ${DB_PASS}
 
   jpa:
+    defer-datasource-initialization: true
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
