@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Welcome to <span th:text="${#strings.capitalize(appName)}"></span>!</h1>
+
+<!-- Link to the users page -->
+<p>
+    <a th:href="@{/users}">Show all users</a>
+</p>
+</body>
+</html>
