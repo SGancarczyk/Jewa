@@ -1,4 +1,4 @@
-package pap.jewa.database;
+package pap.jewa.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pap.jewa.user.Role;
 
 import java.util.Collection;
 import java.util.List;

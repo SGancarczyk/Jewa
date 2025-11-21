@@ -1,11 +1,11 @@
 package pap.jewa.controller;
 
-import pap.jewa.database.User;
+import pap.jewa.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pap.jewa.database.UserRepository;
+import pap.jewa.user.UserRepository;
 
 import java.util.List;
 

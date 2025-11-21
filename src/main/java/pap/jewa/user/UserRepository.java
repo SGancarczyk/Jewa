@@ -1,4 +1,4 @@
-package pap.jewa.database;
+package pap.jewa.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

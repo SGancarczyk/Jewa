@@ -6,8 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pap.jewa.database.User;
-import pap.jewa.database.UserRepository;
+import pap.jewa.user.User;
+import pap.jewa.user.UserRepository;
 import pap.jewa.user.Role;
 
 @Service
