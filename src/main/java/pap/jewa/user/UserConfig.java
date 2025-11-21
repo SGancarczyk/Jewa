@@ -5,13 +5,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import pap.jewa.database.UsersRepository;
+import pap.jewa.database.UserRepository;
 
 @Configuration
 @RequiredArgsConstructor
 public class UserConfig {
 
-    private final UsersRepository userRepository;
+    private final UserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {

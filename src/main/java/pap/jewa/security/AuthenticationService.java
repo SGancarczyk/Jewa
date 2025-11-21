@@ -6,22 +6,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pap.jewa.database.Users;
-import pap.jewa.database.UsersRepository;
+import pap.jewa.database.User;
+import pap.jewa.database.UserRepository;
 import pap.jewa.user.Role;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UsersRepository repository;
+    private final UserRepository repository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
 
     public AuthenticationResponse register(RegisterRequest request) {
-        var user = Users.builder()
+        var user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
