@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         authReq -> authReq
                                 .requestMatchers("/", "/user/**", "/auth/**", "/api/auth/**").permitAll()
-                                .requestMatchers("/api/user/**").hasRole("USER")
+                                .requestMatchers("/api/user/**").authenticated()
                                 .anyRequest().hasRole("ADMIN")
                 )
                 .sessionManagement(sess -> sess
