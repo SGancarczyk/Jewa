@@ -2,16 +2,13 @@ package pap.jewa.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pap.jewa.security.AuthenticationRequest;
 import pap.jewa.security.AuthenticationResponse;
 import pap.jewa.security.AuthenticationService;
 import pap.jewa.security.RegisterRequest;
 
-@Controller
+@RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationApi {
