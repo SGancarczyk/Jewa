@@ -10,4 +10,4 @@ VALUES
     ('mmiller', 'mmiller@example.com', '$2a$10$n1s3kmArDA1/knTVrWhzcOhcyJtsths.gmMk6Zt/os5NBlkClSUPq', 'Michael', 'Miller',  'USER'),
 
     -- password = "password"
-    ('test',  'test@example.com',  '1234', 'test',    'test',    'USER');
+    ('kbravo',  'kbravo@example.com',  '$2a$10$n1s3kmArDA1/knTVrWhzcOhcyJtsths.gmMk6Zt/os5NBlkClSUPq', 'Kara',    'Bravo',    'USER');
