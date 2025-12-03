@@ -25,6 +25,10 @@ spring:
 security:
   token-validity-time: 24h
 
+
+google:
+  client-id: ${CLIENT_ID}
+
 secrets:
   # @WARNING: For production use only!
   jwt-key: 4d8eeb0797b461d0e0169862bc7933a6760bda5b0f511fd40b14556f4524c467

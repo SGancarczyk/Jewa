@@ -28,4 +28,11 @@ public class AuthenticationApi {
     ) {
         return ResponseEntity.ok(service.login(request));
     }
+
+    @PostMapping("google_auth")
+    public ResponseEntity<AuthenticationResponse> testGoogle(
+            @RequestBody String token
+    ) {
+        return ResponseEntity.ok(service.google(token.replace("\"", "")));
+    }
 }
