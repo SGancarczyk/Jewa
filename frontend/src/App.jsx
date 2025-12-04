@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -9,16 +10,32 @@ function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8080/api/auth/login', {
+            const Loginresponse = await fetch('http://localhost:8080/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
 
-            if (response.ok) {
-                const result = await response.json();
-                localStorage.setItem("jwtToken", result.token);
-                navigate("/dashboard");
+            if (Loginresponse.ok) {
+                const result = await Loginresponse.json();
+                const token = result.token;
+                localStorage.setItem("jwtToken", token);
+
+                const userResponse = await fetch('http://localhost:8080/api/user/get_info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (userResponse.ok) {
+                    const userData = await userResponse.json();
+                    console.log("Dane zalogowanego użytkownika:", userData);
+                    navigate("/dashboard");
+                } else {
+                    alert("Błąd przy pobraniu użytkownika");
+                }
             } else {
                 alert("Błąd logowania! Sprawdź login i hasło.");
             }
@@ -28,10 +45,45 @@ function LoginPage() {
         }
     };
 
+    const handleGoogleTest = async (credentialResponse) => {
+        const token = credentialResponse.credential;
+        console.log("Token Google:", token);
+
+        try {
+            const response = await fetch('http://localhost:8080/api/auth/google_auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain' // Ważne: wysyłamy jako tekst, nie JSON
+                },
+                body: token
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const token = result.token;
+                localStorage.setItem("jwtToken", token);
+                navigate("/dashboard");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Nie udało się połączyć z backendem.");
+        }
+    };
+
     return (
-        <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "15px",
+            maxWidth: "400px",
+            margin: "50px auto",
+            padding: "20px",
+            border: "1px solid #ccc",
+            borderRadius: "10px"
+        }}>
             <h2>Logowanie</h2>
-            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
                 <input
                     type="text" placeholder="Username" required
                     value={username} onChange={e => setUsername(e.target.value)}
@@ -42,20 +94,30 @@ function LoginPage() {
                     value={password} onChange={e => setPassword(e.target.value)}
                     style={{ padding: '8px' }}
                 />
-                <button type="submit" style={{ padding: '10px', background: '#007BFF', color: '#fff', border: 'none' }}>
+                <button type="submit" style={{ padding: '10px', background: '#007BFF', color: '#fff', border: 'none', cursor: 'pointer' }}>
                     Zaloguj się
                 </button>
             </form>
 
-            <hr />
+            <hr style={{ width: '100%', margin: '10px 0' }} />
 
-            <p>Nie masz konta?</p>
-            <button
-                onClick={() => navigate('/register')}
-                style={{ padding: '8px 15px', background: '#28a745', color: '#fff', border: 'none', cursor: 'pointer' }}
-            >
-                Załóż konto
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <p style={{ margin: 0 }}>Nie masz konta?</p>
+                <button
+                    onClick={() => navigate('/register')}
+                    style={{ padding: '5px 10px', background: '#28a745', color: '#fff', border: 'none', cursor: 'pointer', borderRadius: '4px' }}
+                >
+                    Załóż konto
+                </button>
+            </div>
+
+            {/* Podpięcie funkcji handleGoogleTest */}
+            <GoogleLogin
+                onSuccess={handleGoogleTest}
+                onError={() => {
+                    console.log('Logowanie Google nieudane');
+                }}
+            />
         </div>
     );
 }
@@ -103,8 +165,8 @@ function RegisterPage() {
         <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
             <h2>Rejestracja</h2>
             <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <input name="firstname" placeholder="Imię" onChange={handleChange} required style={{ padding: '8px' }} />
-                <input name="lastname" placeholder="Nazwisko" onChange={handleChange} required style={{ padding: '8px' }} />
+                <input name="firstName" placeholder="Imię" onChange={handleChange} required style={{ padding: '8px' }} />
+                <input name="lastName" placeholder="Nazwisko" onChange={handleChange} required style={{ padding: '8px' }} />
                 <input name="username" placeholder="Username (login)" onChange={handleChange} required style={{ padding: '8px' }} />
                 <input name="email" type="email" placeholder="Email" onChange={handleChange} required style={{ padding: '8px' }} />
                 <input name="password" type="password" placeholder="Hasło" onChange={handleChange} required style={{ padding: '8px' }} />
