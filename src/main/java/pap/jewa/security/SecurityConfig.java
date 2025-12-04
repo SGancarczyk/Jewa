@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.http.HttpMethod;
 
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -39,13 +40,14 @@ public class SecurityConfig {
                         authReq -> authReq
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/user/**").hasRole("USER")
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/offers/images/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/offers/get_offers").permitAll()
                                 .anyRequest().hasRole("ADMIN")
                 )
                 .sessionManagement(sess -> sess
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-
         return http.build();
     }
 
