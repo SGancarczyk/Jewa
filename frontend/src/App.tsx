@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
+import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
 
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
         try {
             const Loginresponse = await fetch('http://localhost:8080/api/auth/login', {
@@ -45,7 +45,7 @@ function LoginPage() {
         }
     };
 
-    const handleGoogleTest = async (credentialResponse) => {
+    const handleGoogleTest = async (credentialResponse: CredentialResponse) => {
         const token = credentialResponse.credential;
         console.log("Token Google:", token);
 
@@ -55,7 +55,7 @@ function LoginPage() {
                 headers: {
                     'Content-Type': 'text/plain' // Ważne: wysyłamy jako tekst, nie JSON
                 },
-                body: token
+                body: token ?? null
             });
 
             if (response.ok) {
@@ -132,14 +132,14 @@ function RegisterPage() {
         password: ''
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
     };
 
-    const handleRegister = async (e) => {
+    const handleRegister = async (e: FormEvent) => {
         e.preventDefault();
         try {
             const response = await fetch('http://localhost:8080/api/auth/register', {
