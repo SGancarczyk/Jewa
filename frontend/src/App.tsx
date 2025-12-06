@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
+import MainPage from './MainPage/MainPage';
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -210,8 +211,9 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LoginPage />} />
+                <Route path="/" element={<MainPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </BrowserRouter>
