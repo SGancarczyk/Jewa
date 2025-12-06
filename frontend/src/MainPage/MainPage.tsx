@@ -1,7 +1,11 @@
 import Header from "./Header/Header";
+import './MainPage.css'
 
 function MainPage() {
-    return <Header/ >
+    return <div className="desktop">
+        <div className="background-image" />
+        <Header />
+    </div>
 }
 
 export default MainPage;
