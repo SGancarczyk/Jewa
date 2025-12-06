@@ -33,7 +33,7 @@ function LoginPage() {
                 if (userResponse.ok) {
                     const userData = await userResponse.json();
                     console.log("Dane zalogowanego użytkownika:", userData);
-                    navigate("/dashboard");
+                    navigate("/");
                 } else {
                     alert("Błąd przy pobraniu użytkownika");
                 }
@@ -63,7 +63,7 @@ function LoginPage() {
                 const result = await response.json();
                 const token = result.token;
                 localStorage.setItem("jwtToken", token);
-                navigate("/dashboard");
+                navigate("/");
             }
         } catch (err) {
             console.error(err);
