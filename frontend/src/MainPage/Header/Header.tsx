@@ -40,16 +40,16 @@ export const Header = () => {
     }, [])
 
     const getButtons = () => {
-        if (isLoading) {
-            return <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <ClipLoader
-                        loading={true}
-                        color="#000000"
-                        size={30}
-                        speedMultiplier={1}
-                    />
-                </div>
-        }
+        // if (isLoading) {
+        //     return <div style={{ display: 'flex', alignItems: 'center' }}>
+        //             <ClipLoader
+        //                 loading={true}
+        //                 color="#000000"
+        //                 size={30}
+        //                 speedMultiplier={1}
+        //             />
+        //         </div>
+        // }
         if (userData) {
             return <>
                 <button className="nav-button">
