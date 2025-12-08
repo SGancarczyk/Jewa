@@ -9,9 +9,10 @@ interface Props {
   value: string | null;
   onChange: (newValue: string | null) => void;
   label: string;
+  placeholder?: string
 }
 
-export const AutocompleteSelector = ({ options, value, onChange, label }: Props) => {
+export const AutocompleteSelector = ({ options, value, onChange, label, placeholder = "Wybierz lub wpisz..." }: Props) => {
   return (
     <Autocomplete
         className='car-selector-root'
@@ -31,7 +32,7 @@ export const AutocompleteSelector = ({ options, value, onChange, label }: Props)
         <TextField
             {...params}
             label={label}
-            placeholder="Wybierz lub wpisz..."
+            placeholder={placeholder}
         />
       )}
     />

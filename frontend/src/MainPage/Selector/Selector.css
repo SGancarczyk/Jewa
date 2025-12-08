@@ -1,30 +1,32 @@
 .search-grid-container {
     display: grid;
-    /* Tworzymy 3 równe kolumny (dla 3 typów pojazdów) */
     grid-template-columns: repeat(4, 1fr);
-
-    /* Fioletowe przerwy ze zdjęcia: */
     row-gap: 36px;
     column-gap: 16px;
     width: 60%;
 }
 
-/* Styl dla zielonego elementu (Autocomplete) */
-.brand-select-wrapper {
-    /* Mówimy: Zajmij miejsce od 1. linii pionowej do 3. linii pionowej. */
-    /* Matematyka: Linia 1 (start) -> Guzik 1 -> Linia 2 -> Guzik 2 -> Linia 3 (koniec) */
-    grid-column: 1 / 3;
-
-    /* Przenosimy do drugiego rzędu */
-    grid-row: 2;
+.search-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 24px;
+    background: #000000;
+    border-radius: 8px;
+    width: 100%;
+    height: 58px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    transition: all 0.15s ease;
 }
 
-.fuel-select-wrapper {
-    grid-column: 3 / 5;
-
-    /* Przenosimy do drugiego rzędu */
-    grid-row: 2;
+.search-button:hover {
+    background: #1A1A1A;
 }
+
 .container {
     position: relative;
 
@@ -49,12 +51,12 @@
 }
 
 .hero-title {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 48px;
-  color: #000000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    color: #000000;
 }
 
 .hero-title strong {
-  font-weight: 900;
+    font-weight: 900;
 }
