@@ -1,10 +1,10 @@
 .vehicle-selector-container {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
+    display: contents;
 }
 
 .vehicle-btn {
+    grid-column: auto;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,4 +30,11 @@
 .vehicle-btn.active {
     border-color: #000000;
     background: #FFFFFF;
+}
+
+.ghost-button {
+    /* Zajmuje miejsce w siatce (szerokość), ale go nie widać */
+    width: 100%;
+    visibility: hidden;
+    pointer-events: none; /* Nie da się w niego kliknąć */
 }

@@ -13,7 +13,7 @@ interface VehicleOption {
 const options: VehicleOption[] = [
     { id: 'personal', label: 'osobowe', icon: 'car' },
     { id: 'truck', label: 'ciężarowe', icon: 'truck' },
-    { id: 'construction', label: 'budowlane', icon: 'construction' }
+    { id: 'construction', label: 'budowlane', icon: 'construction' },
 ];
 
 interface Props {
@@ -33,6 +33,7 @@ export const TypeSelector = ({selected, onSelect}: Props) => {
                 <span>{option.label}</span>
             </button>
         ))}
+        <div className="ghost-button" />
     </div>
 };
 

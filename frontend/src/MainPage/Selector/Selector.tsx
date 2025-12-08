@@ -3,17 +3,17 @@ import './Selector.css';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from './Icons/Icon';
 import TypeSelector from './TypeSelector/TypeSelector';
-import { AutocompleteSelect } from './AutocompleteSelect/AutocompleteSelect';
+import { AutocompleteSelector } from './AutocompleteSelect/AutocompleteSelect';
 
 const mockDatabase: Record<string, string[]> = {
-  personal: ["Audi", "BMW", "Volkswagen", "Toyota", "Opel"],
-  truck: ["Volvo", "Scania", "MAN", "DAF", "Mercedes-Benz Trucks"],
-  construction: ["CAT", "JCB", "Komatsu", "Liebherr"]
+    personal: ["Audi", "BMW", "Volkswagen", "Toyota", "Opel", "Polonez", "Citroen", "BYD", "Renault", "Nissan"],
+    truck: ["Volvo", "Scania", "MAN", "DAF", "Mercedes-Benz Trucks"],
+    construction: ["CAT", "JCB", "Komatsu", "Liebherr"]
 };
 
 export const Selsector = () => {
     const [vehicleType, setVehicleType] = useState("");
-    const [brand, setBrand] = useState('');
+    const [brand, setBrand] = useState<string | null>('');
 
     const currentBrandOptions = mockDatabase[vehicleType] || [];
     useEffect(() => {
@@ -22,22 +22,25 @@ export const Selsector = () => {
 
     return <div className='container'>
         <h1 className='hero-title'>Znajdź idealne auto <strong>dla siebie</strong></h1>
-        <TypeSelector selected={vehicleType} onSelect={setVehicleType}/>
-
-        <AutocompleteSelect
-            label="Marka pojazdu"
-            placeholder="Wpisz markę..."
-            value={brand}
-            onSelect={(val) => setBrand(val)}
-            options={currentBrandOptions}
-        />
-
-        <AutocompleteSelect
-            label="Paliwo"
-            value=""
-            onSelect={() => {}}
-            options={["Benzyna", "Diesel", "Elektryczny", "Hybryda"]}
-        />
+        <div className='search-grid-container'>
+            <TypeSelector selected={vehicleType} onSelect={setVehicleType} />
+            <div className="brand-select-wrapper">
+                <AutocompleteSelector
+                    label="Marka pojazdu"
+                    options={currentBrandOptions}
+                    value={brand}
+                    onChange={(newVal) => setBrand(newVal)}
+                />
+            </div>
+            <div className="fuel-select-wrapper">
+                <AutocompleteSelector
+                    label="Model pojazdu"
+                    options={currentBrandOptions}
+                    value={brand}
+                    onChange={(newVal) => setBrand(newVal)}
+                />
+            </div>
+        </div>
     </div>
 };
 
