@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-252.28238.7">
+    <data-source name="jewadb@localhost" uuid="f31d2505-ac81-43f7-a274-0f8c41a3a38b">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <user-name>${DB_USER}</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>
