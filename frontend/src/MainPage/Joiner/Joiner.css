@@ -1,0 +1,11 @@
+.joiner-bar {
+    height: 19vh;
+    width: 100%;
+    background-color: white;
+
+    display: flex;
+    align-items: center; 
+    padding-left: 3vw;        /* odstęp od lewej */
+
+    border-bottom: 2px solid #ccc;
+}

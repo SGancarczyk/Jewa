@@ -1,0 +1,16 @@
+.upper-bar {
+    flex: 0 0 15vh; /* stała wysokość 15vh */
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center; 
+    padding-left: 3vw;
+    border-bottom: 2px solid #ccc;
+}
+
+.page-title {
+    font-size: clamp(20px, 4vw, 60px);
+    font-weight: bold;
+    color: black;
+    margin: 0;
+}

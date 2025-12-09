@@ -1,23 +1,32 @@
 .desktop {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background: #FAFAFA;
+    display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    background: #FAFAFA;
 }
 
 .background-image {
-position: fixed;
-  top: 0;
+position: absolute;
+  top: 0vh;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-image: url(./assets/backgroung_image.png);
   background-size: cover;
+  z-index: 0;
 
   /* Zmiana tutaj: */
   /* center (poziomo)  69px (pionowo - od góry) */
   background-position: center 69px;
 
   background-repeat: no-repeat;
+}
+
+.offerboard-wrapper {
+    background-color: white; /* or background-color */
+    background-size: cover;
+    background-position: center;
+    padding: 20px; /* optional */
+    flex: 1; /* wypełnia dostępną przestrzeń między górą a BottomBar */
 }

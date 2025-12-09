@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
 import MainPage from './MainPage/MainPage';
-import OfferBoard from './OfferBoard/OfferBoard';
+import OfferBoard from './MainPage/OfferBoard/OfferBoard';
 import InformationPage from './InformationPage/InformationPage';
 import HelpPage from './HelpPage/HelpPage';
 import ContactPage from './ContactPage/ContactPage';
@@ -220,7 +220,6 @@ function App() {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/offerboard" element={<OfferBoard />} />
                 <Route path="/information" element={<InformationPage />} />
                 <Route path="/help" element={<HelpPage />} />
                 <Route path="/contact" element={<ContactPage />} />
