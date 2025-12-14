@@ -8,16 +8,7 @@ import test5 from '../../../assets/3zZgb8NJ-E9MEe28Gpw-(edit) 1.png';
 import OfferTemplate from './OfferTemplate/OfferTemplate';
 import { Icon } from '../../Selector/Icons/Icon';
 
-interface ContentAreaProps {
-    onExpand?: () => void;
-}
-
-function ContentArea({ onExpand }: ContentAreaProps) {
-    const [expanded, setExpanded] = useState(false);
-    const gridRef = useRef<HTMLDivElement>(null);
-    const [initialMaxHeight, setInitialMaxHeight] = useState<string>('0px');
-
-    const offers = [
+const mockDatabase = [
   { imageUrl: test3, title: "Audi A6", price: "54 900 zł" },
   { imageUrl: test1, title: "BMW X5", price: "87 500 zł" },
   { imageUrl: test5, title: "Toyota Corolla", price: "32 400 zł" },
@@ -47,40 +38,23 @@ function ContentArea({ onExpand }: ContentAreaProps) {
   { imageUrl: test5, title: "Opel Insignia", price: "35 600 zł" },
   { imageUrl: test2, title: "Volvo V60", price: "84 200 zł" },
   { imageUrl: test4, title: "BMW X3", price: "95 700 zł" },
-  { imageUrl: test1, title: "Audi A4", price: "58 900 zł" }
+//   { imageUrl: test1, title: "Audi A4", price: "58 900 zł" }
 ];
 
-    useEffect(() => {
-        if (gridRef.current) {
-            const firstOffer = gridRef.current.firstElementChild as HTMLElement;
-            if (firstOffer) {
-                const rowHeight = firstOffer.offsetHeight + 16; 
-                const visibleRows = 2;
-                const extraSpace = 60;
-                setInitialMaxHeight(`${rowHeight * visibleRows + extraSpace}px`);
-            }
-        }
-    }, []);
+function ContentArea() {
+    const [expanded, setExpanded] = useState(false);
+    const [displayOffers, setDisplayOffers] = useState(0);
 
-    const handleExpand = () => {
-        if (gridRef.current) {
-            gridRef.current.style.maxHeight = `${gridRef.current.scrollHeight}px`;
-            setExpanded(true);
-            if (onExpand) onExpand(); // <-- tutaj wywołujemy callback
-        }
-    };
+    const offers = expanded ? mockDatabase : mockDatabase.slice(0, Math.floor(window.innerWidth / 300) * 2);
 
     return (
-        <div className="content-area">
-            <div
-                className="offers-grid"
-                ref={gridRef}
-                style={{
-                    maxHeight: expanded ? undefined : initialMaxHeight,
-                    overflow: expanded ? 'visible' : 'hidden',
-                    transition: 'max-height 0.5s ease',
-                }}
-            >
+        <div className="aaacontent-area">
+            <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center'
+
+            }}>
                 {offers.map((offer, index) => (
                     <OfferTemplate
                         key={index}
@@ -94,19 +68,8 @@ function ContentArea({ onExpand }: ContentAreaProps) {
             {!expanded && (
                 <button
                     className="scroll-toggle-button"
-                    onClick={handleExpand}
-                    style={{
-                        position: 'absolute',
-                        height: '24rem',
-                        bottom: '0rem',
-                        left: 0,
-                        width: '100%',
-                        zIndex: 10,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                    }}
+                    onClick={() => setExpanded(true)}
+
                 >
                     <span className="button-text">POKAŻ WIĘCEJ</span>
                     <div className="button-icon" style={{ marginTop: '0.5rem', marginLeft: '3.5rem' }}>

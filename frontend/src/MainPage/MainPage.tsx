@@ -5,23 +5,17 @@ import OfferBoard from "./OfferBoard/OfferBoard";
 import BottomBar from "./BottomBar/BottomBar";
 import Joiner from "./Joiner/Joiner";
 import './MainPage.css'
+import ContentArea from "./OfferBoard/ContentArea/ContentArea";
 
 function MainPage() {
-    const [showBottomBar, setShowBottomBar] = useState(true); // stan kontrolujący BottomBar
-
-    const handleOfferExpand = () => {
-        console.log('Przycisk POKAŻ WIĘCEJ został kliknięty i dotarł do MainPage!');
-        setShowBottomBar(false); // ukryj BottomBar po kliknięciu
-    };
-
     return (
         <div className="desktop">
             <div className="background-image" />
             <Selsector />
             <Header />
             <Joiner />
-            <OfferBoard onContentExpand={handleOfferExpand} />
-            {showBottomBar && <BottomBar />}
+            <OfferBoard />
+            <BottomBar />
         </div>
     );
 }

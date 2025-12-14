@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
 import MainPage from './MainPage/MainPage';
-import OfferBoard from './MainPage/OfferBoard/OfferBoard';
 import InformationPage from './InformationPage/InformationPage';
 import HelpPage from './HelpPage/HelpPage';
 import ContactPage from './ContactPage/ContactPage';

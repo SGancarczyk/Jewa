@@ -1,7 +1,6 @@
 /* ======== BOTTOM BAR — DÓŁ STRONY ======== */
 .bottom-bar {
     position: relative;
-    bottom: 0;
     height: 15vh;
     background-color: black;
 }
