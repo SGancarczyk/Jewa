@@ -7,19 +7,14 @@
 }
 
 .background-image {
-position: absolute;
-  top: 0vh;
+position: fixed;
+  top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-image: url(./assets/backgroung_image.png);
   background-size: cover;
-  z-index: 0;
-
-  /* Zmiana tutaj: */
-  /* center (poziomo)  69px (pionowo - od góry) */
   background-position: center 69px;
-
   background-repeat: no-repeat;
 }
 

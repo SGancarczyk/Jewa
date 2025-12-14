@@ -1,11 +1,12 @@
 .upper-bar {
-    flex: 0 0 15vh; /* stała wysokość 15vh */
     width: 100%;
     background-color: white;
     display: flex;
     align-items: center;
-    padding-left: 3vw;
+    padding-top: 13vh;
+    padding-bottom: 7vh;
     border-bottom: 2px solid #ccc;
+    z-index: 1;
 }
 
 .page-title {
