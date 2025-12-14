@@ -1,0 +1,6 @@
+.content-area {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;                 /* automatycznie wypełnia pozostałą przestrzeń */
+}
