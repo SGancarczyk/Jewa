@@ -4,7 +4,6 @@ package pap.jewa.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,6 @@ import java.util.List;
 @RequestMapping("/api/vehicles")
 @RequiredArgsConstructor
 public class VehicleApi {
-    private final VehicleRepository vehicleRepo;
     private final MakeRepository makeRepo;
     private final ModelRepository modelRepo;
 

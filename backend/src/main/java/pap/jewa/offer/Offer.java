@@ -3,8 +3,12 @@ package pap.jewa.offer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
-import pap.jewa.vehicle.Vehicle;
+import pap.jewa.vehicle.BodyType;
+import pap.jewa.vehicle.FuelType;
+import pap.jewa.vehicle.Model;
 import pap.jewa.user.User;
+import pap.jewa.vehicle.VehicleType;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,17 +40,29 @@ public class Offer {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-
-    // cascade - save vehicle also
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicle;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id", nullable = false)
     @JsonIgnoreProperties({"password", "role", "tokens"})
     private User owner;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "vehicle_type", nullable = false)
+    private VehicleType vehicleType;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "model_id", nullable = false)
+    private Model model;
+
+    @Column(name = "production_year")
+    private Integer productionYear;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "body_type")
+    private BodyType bodyType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "fuel_type")
+    private FuelType fuelType;
 
     @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OfferImage> images;

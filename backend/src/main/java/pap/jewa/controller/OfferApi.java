@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pap.jewa.offer.*;
 import pap.jewa.user.User;
+import pap.jewa.vehicle.VehicleType;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,11 +37,27 @@ public class OfferApi {
 
     @PostMapping("/get_offers")
     public ResponseEntity<List<Offer>> getOffers(@RequestBody OfferSearchRequest request) {
+        int pageNum = request.getPage();
         int limit = request.getLimit();
-        if (limit <= 0) limit = 10;
 
-        Pageable pageable = PageRequest.of(0, limit, Sort.by("createdAt").descending());
-        Page<Offer> page = offerRepository.findAll(pageable);
+        int year = request.getYear();
+        String make = request.getMake();
+        String model = request.getModel();
+        VehicleType vehicleType = request.getVehicleType();
+
+        if (limit <= 0) limit = 40;
+        if (pageNum < 0) pageNum = 0;
+
+        Pageable pageable = PageRequest.of(pageNum, limit, Sort.by("createdAt").descending());
+
+        Specification<Offer> spec = Specification.allOf(
+                OfferSpecifications.hasProductionYear(request.getYear()),
+                OfferSpecifications.hasModel(request.getModel()),
+                OfferSpecifications.hasMake(request.getMake()),
+                OfferSpecifications.hasVehicleType(request.getVehicleType())
+        );
+
+        Page<Offer> page = offerRepository.findAll(spec, pageable);
 
         return ResponseEntity.ok(page.getContent());
     }
