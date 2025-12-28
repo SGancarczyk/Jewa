@@ -64,7 +64,6 @@ public class Offer {
     @Column(name = "fuel_type")
     private FuelType fuelType;
 
-
     @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OfferImage> images;
 }
