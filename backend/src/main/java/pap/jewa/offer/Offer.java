@@ -7,6 +7,8 @@ import pap.jewa.vehicle.BodyType;
 import pap.jewa.vehicle.FuelType;
 import pap.jewa.vehicle.Model;
 import pap.jewa.user.User;
+import pap.jewa.vehicle.VehicleType;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,6 +44,10 @@ public class Offer {
     @JoinColumn(name = "owner_id", nullable = false)
     @JsonIgnoreProperties({"password", "role", "tokens"})
     private User owner;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "vehicle_type", nullable = false)
+    private VehicleType vehicleType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "model_id", nullable = false)
