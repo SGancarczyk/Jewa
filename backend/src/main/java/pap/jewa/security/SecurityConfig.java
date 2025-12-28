@@ -43,6 +43,8 @@ public class SecurityConfig {
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/offers/images/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/offers/get_offers").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/vehicles/get_makes").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/vehicles/get_models").permitAll()
                                 .anyRequest().hasRole("ADMIN")
                 )
                 .sessionManagement(sess -> sess
