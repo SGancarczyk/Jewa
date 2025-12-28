@@ -1,5 +1,5 @@
-INSERT INTO vehicles (brand, model, production_year, body_type, fuel_type)
+INSERT INTO vehicles (model_id, production_year, body_type, fuel_type)
 VALUES
-    ('Toyota', 'Yaris', 2020, 'HATCHBACK', 'HYBRID'),
-     ('BMW', 'X5', 2022, 'SUV', 'DIESEL'),
-     ('Ford', 'Mustang', 2021, 'COUPE', 'PETROL');
+    (1, 2020, 'HATCHBACK', 'HYBRID'),
+     (2, 2022, 'SUV', 'DIESEL'),
+     (3, 2021, 'COUPE', 'PETROL');

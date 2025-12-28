@@ -1,5 +1,6 @@
 package pap.jewa.vehicle;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,11 +20,9 @@ public class Vehicle {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "brand", nullable = false)
-    private String brand;
-
-    @Column(name = "model", nullable = false)
-    private String model;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "model_id", nullable = false)
+    private Model model;
 
     @Column(name = "production_year")
     private Integer productionYear;

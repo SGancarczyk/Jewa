@@ -3,7 +3,12 @@ spring:
   sql:
     init:
       mode: always
-      data-locations: classpath:database_init/dummy_users.sql, classpath:database_init/dummy_vehicles.sql, classpath:database_init/dummy_offers.sql
+      data-locations:
+        - classpath:database_init/dummy_users.sql
+        - classpath:database_init/makes.sql
+        - classpath:database_init/models.sql
+        - classpath:database_init/dummy_vehicles.sql
+        - classpath:database_init/dummy_offers.sql
   application:
     name: jewa
 
