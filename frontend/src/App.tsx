@@ -1,13 +1,18 @@
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
+import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
+import MainPage from './MainPage/MainPage';
+import InformationPage from './InformationPage/InformationPage';
+import HelpPage from './HelpPage/HelpPage';
+import ContactPage from './ContactPage/ContactPage';
+import ClientServicePage from './ClientServicePage/ClientServicePage';
 
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
         try {
             const Loginresponse = await fetch('http://localhost:8080/api/auth/login', {
@@ -32,7 +37,7 @@ function LoginPage() {
                 if (userResponse.ok) {
                     const userData = await userResponse.json();
                     console.log("Dane zalogowanego użytkownika:", userData);
-                    navigate("/dashboard");
+                    navigate("/");
                 } else {
                     alert("Błąd przy pobraniu użytkownika");
                 }
@@ -45,7 +50,7 @@ function LoginPage() {
         }
     };
 
-    const handleGoogleTest = async (credentialResponse) => {
+    const handleGoogleTest = async (credentialResponse: CredentialResponse) => {
         const token = credentialResponse.credential;
         console.log("Token Google:", token);
 
@@ -55,14 +60,14 @@ function LoginPage() {
                 headers: {
                     'Content-Type': 'text/plain' // Ważne: wysyłamy jako tekst, nie JSON
                 },
-                body: token
+                body: token ?? null
             });
 
             if (response.ok) {
                 const result = await response.json();
                 const token = result.token;
                 localStorage.setItem("jwtToken", token);
-                navigate("/dashboard");
+                navigate("/");
             }
         } catch (err) {
             console.error(err);
@@ -132,14 +137,14 @@ function RegisterPage() {
         password: ''
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
     };
 
-    const handleRegister = async (e) => {
+    const handleRegister = async (e: FormEvent) => {
         e.preventDefault();
         try {
             const response = await fetch('http://localhost:8080/api/auth/register', {
@@ -210,9 +215,14 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LoginPage />} />
+                <Route path="/" element={<MainPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/information" element={<InformationPage />} />
+                <Route path="/help" element={<HelpPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/clientservice" element={<ClientServicePage />} />
             </Routes>
         </BrowserRouter>
     );

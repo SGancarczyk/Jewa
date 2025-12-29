@@ -1,0 +1,21 @@
+/* index.css */
+
+/* 1. Resetuje marginesy przeglądarki (usuwa białe paski) */
+body {
+  margin: 0;
+  padding: 0;
+  /* Opcjonalnie: domyślna czcionka, żeby nie było Times New Roman */
+  font-family: 'Inter', sans-serif;
+}
+
+/* 2. Naprawia matematykę paddingów (kluczowe dla Twojego nagłówka!) */
+* {
+  box-sizing: border-box;
+}
+
+/* 3. Usuwa domyślne style kontenera aplikacji (jeśli jakieś były) */
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
