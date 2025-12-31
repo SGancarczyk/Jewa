@@ -41,10 +41,12 @@ public class SecurityConfig {
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/user/**").hasRole("USER")
                                 .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/offers").hasRole("USER")
                                 .requestMatchers(HttpMethod.GET, "/api/offers/images/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/offers/get_offers").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/vehicles/get_makes").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/vehicles/get_models").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/offers/*/images").hasRole("USER")
                                 .anyRequest().hasRole("ADMIN")
                 )
                 .sessionManagement(sess -> sess

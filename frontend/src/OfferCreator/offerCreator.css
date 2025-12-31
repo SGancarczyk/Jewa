@@ -1,0 +1,47 @@
+.offer-creator-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.creator-background-image {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./assets/background_image2.png);
+  background-size: cover;
+  background-position: center -70px;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.creator-container {
+    position: relative;
+
+    margin-bottom: 32px;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 90%;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 16px 16px 26.9px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 32px;
+
+    padding: 40px;
+    padding-left: 96px;
+    padding-right: 96px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.title-selector-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 36px;
+    margin-bottom: 20px;
+}

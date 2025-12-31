@@ -1,0 +1,44 @@
+.slider-controls {
+  display: flex;
+  width: 100%;
+}
+
+.slider {
+  width: 50%;
+  height: 100%;
+  border: 2px solid #333;
+  overflow: hidden;
+}
+
+.rotor-btn {
+  width: 50%;
+  font-size: 200%;
+  cursor: pointer;
+  border: none;
+  background: #eee;
+}
+
+.rotor-btn:hover {
+  background: #ddd;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-image {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  cursor: zoom-out;
+}
+
+.slider-image {
+  cursor: zoom-in;
+}
