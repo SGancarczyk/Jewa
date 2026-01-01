@@ -13,7 +13,7 @@
 
 /* Tytuł strony */
 .page-title {
-    font-size: clamp(20px, 4vw, 60px);   /* automatyczne skalowanie */
+    font-size: 12vh;   /* automatyczne skalowanie */
     font-weight: bold;
     color: black;
     margin: 0;

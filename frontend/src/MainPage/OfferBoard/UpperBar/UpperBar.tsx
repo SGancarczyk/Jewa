@@ -4,7 +4,7 @@ import './UpperBar.css';
 function UpperBar() {
     return (
         <div className="upper-bar">
-            <h1 className="page-title">Tablica Ogłoszeń</h1>
+            <h1 className="page-title-main">Tablica Ogłoszeń</h1>
         </div>
     );
 }
