@@ -4,7 +4,7 @@ import './BottomBar.css';
 
 function BottomBar() {
     return (
-        <div className="bottom-bar">
+        <div className="bbottom-bar">
             <Link to="/" className="logo-link">JEVA</Link>
 
             <div className="links-container">

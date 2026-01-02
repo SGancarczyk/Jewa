@@ -18,6 +18,20 @@
     cursor: pointer; /* albo: cursor: crosshair, move, wait, etc. */
 }
 
+.empty-image {
+    width: 100%;
+    height: 150px;
+    background-color: #cccccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #666666;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    gap: 5px;
+}
 
 .offer-image {
     width: 100%;

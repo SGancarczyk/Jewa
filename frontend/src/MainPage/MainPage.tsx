@@ -46,8 +46,8 @@ function MainPage() {
     return (
         <div className="desktop">
             <div className="background-image" />
-            <Selsector onSearch={handleSearch} searchLimit={searchLimit}/>
             <Header />
+            <Selsector onSearch={handleSearch} searchLimit={searchLimit}/>
             <OfferBoard offers={offers} searchLimit={searchLimit} onSearchLimit={setSearchLimit}/>
             <BottomBar />
         </div>

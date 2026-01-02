@@ -11,10 +11,10 @@ interface OfferBoardProps {
 
 function OfferBoard({ offers, searchLimit }: OfferBoardProps) {
     return (
-        <>
+        <div className='offer-board'>
             <UpperBar />
             <ContentArea offers={offers} searchLimit={searchLimit}/>
-        </>
+        </div>
     );
 }
 

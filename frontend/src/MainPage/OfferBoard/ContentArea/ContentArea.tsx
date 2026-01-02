@@ -49,7 +49,6 @@ function ContentArea({ offers, searchLimit }: ContentAreaProps) {
                 {offers.map((offer, index) => (
                     <OfferTemplate
                         key={index}
-                        imageUrl={offer.imageUrl}
                         title={offer.title}
                         price={offer.price}
                     />

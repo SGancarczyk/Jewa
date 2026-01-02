@@ -1,4 +1,5 @@
 .upper-bar {
+    position: relative;
     font-family: 'Inter', sans-serif;
     width: 100%;
     background-color: white;
@@ -7,7 +8,7 @@
     padding-top: 11vh;
     padding-bottom: 8vh;
     border-bottom: 2px solid #ccc;
-    z-index: 1;
+    padding-right: 5vh;
 }
 
 .upper-title {
@@ -16,4 +17,24 @@
     color: black;
     font-weight: 900;
     margin: 0;
+}
+
+.add-offer-button {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    padding: 18px;
+    width: 355px;
+    background: #000000;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    transition: all 0.15s ease;
+}
+
+.add-offer-button:hover {
+    background: #222222;
+    cursor: pointer;
 }
