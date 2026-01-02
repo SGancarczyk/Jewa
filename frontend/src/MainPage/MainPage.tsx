@@ -1,8 +1,8 @@
 import { use, useEffect, useState } from "react";
-import Header from "./Header/Header";
+import Header from "../support/Header/Header";
 import Selsector from "./Selector/Selector";
 import OfferBoard from "./OfferBoard/OfferBoard";
-import BottomBar from "./BottomBar/BottomBar";
+import BottomBar from "../support/BottomBar/BottomBar";
 import './MainPage.css'
 import { type SearchCriteria } from "./Selector/Selector";
 

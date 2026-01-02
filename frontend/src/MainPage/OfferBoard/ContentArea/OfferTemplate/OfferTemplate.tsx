@@ -1,6 +1,6 @@
 import React from 'react';
 import './OfferTemplate.css';
-import { Icon } from '../../../Selector/Icons/Icon';
+import { Icon } from '../../../../Icons/Icon';
 import { useEffect, useState } from 'react';
 
 interface OfferTemplateProps {

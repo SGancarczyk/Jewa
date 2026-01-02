@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { use, useEffect } from "react";
+import Header from "../support/Header/Header";
+import BottomBar from "../support/BottomBar/BottomBar";
+import './offerCreator.css';
 
 function OfferCreatorPage() {
     const navigate = useNavigate();
@@ -89,7 +92,8 @@ function OfferCreatorPage() {
     };
 
     return (
-        <>
+        <div className="offer-creator-page">
+            <Header />
             <button onClick={() => navigate("/")}>
                 Wróć do strony głównej
             </button>
@@ -97,7 +101,8 @@ function OfferCreatorPage() {
             <button onClick={handleAddOffer}>
                 Dodaj ofertę
             </button>
-        </>
+            <BottomBar />
+        </div>
     );
 }
 

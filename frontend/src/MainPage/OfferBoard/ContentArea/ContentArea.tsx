@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ContentArea.css';
 import OfferTemplate from './OfferTemplate/OfferTemplate';
-import { Icon } from '../../Selector/Icons/Icon';
+import { Icon } from '../../../Icons/Icon';
 
 // const mockDatabase = [
 //   { imageUrl: test3, title: "Audi A6", price: "54 900 zł" },
