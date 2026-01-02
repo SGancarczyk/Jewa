@@ -4,15 +4,16 @@
     background-color: white;
     display: flex;
     align-items: center;
-    padding-top: 12vh;
+    padding-top: 11vh;
     padding-bottom: 8vh;
     border-bottom: 2px solid #ccc;
     z-index: 1;
 }
 
-.page-title {
-    font-size: clamp(20px, 4vw, 60px);
+.upper-title {
+    font-size: 48px;
     font-weight: bold;
     color: black;
+    font-weight: 900;
     margin: 0;
 }
