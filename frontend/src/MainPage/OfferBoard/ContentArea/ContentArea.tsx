@@ -9,11 +9,12 @@ import { Icon } from '../../Selector/Icons/Icon';
 
 interface ContentAreaProps {
     offers: any[];
-    searchLimit: number
-    onSearchLimit: (limit: number) => void;
+    page: number;
+    onPage: (limit: number) => void;
+    endFlag: boolean;
 }
 
-function ContentArea({ offers, searchLimit, onSearchLimit }: ContentAreaProps) {
+function ContentArea({ offers, page, onPage, endFlag }: ContentAreaProps) {
     useEffect(() => {
         console.log(offers);
     }, [offers]);
@@ -21,7 +22,7 @@ function ContentArea({ offers, searchLimit, onSearchLimit }: ContentAreaProps) {
     const showMoreOffers = () => {
         return <button
             className="scroll-toggle-button"
-            onClick={() => onSearchLimit(searchLimit + 10)}
+            onClick={() => onPage(page + 1)}
         >
             <span className="button-text">POKAŻ WIĘCEJ</span>
             <div className="button-icon" style={{ marginTop: '0.5rem', marginLeft: '3.5rem' }}>
@@ -45,9 +46,9 @@ function ContentArea({ offers, searchLimit, onSearchLimit }: ContentAreaProps) {
                 justifyContent: 'center'
 
             }}>
-                {offers.map((offer) => (
+                {offers.map((offer, index) => (
                     <OfferTemplate
-                        key={offer.id}
+                        key={index}
                         id={offer.id}
                         title={offer.title}
                         price={offer.price}
@@ -57,7 +58,7 @@ function ContentArea({ offers, searchLimit, onSearchLimit }: ContentAreaProps) {
             </div>
 
             {offers.length === 0 && emptyOfferBoard()}
-            {offers.length >= searchLimit && showMoreOffers()}
+            {!endFlag && showMoreOffers()}
         </div>
     );
 }

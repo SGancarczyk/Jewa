@@ -3,6 +3,13 @@ import './Selector.css';
 import TypeSelector from './TypeSelector/TypeSelector';
 import { AutocompleteSelector } from './AutocompleteSelect/AutocompleteSelect';
 
+export interface SearchCriteria {
+    make?: string | null;
+    model?: string | null;
+    year?: string | null;
+    vehicleType?: string | null;
+}
+
 interface MakeDTO {
     id: number;
     name: string;
@@ -15,15 +22,14 @@ interface ModelDTO {
 }
 
 interface SelectorProps {
-    onSearch: (criteria: any) => void;
-    searchLimit: number;
+    onSearchCriteria: (criteria: SearchCriteria) => void;
 }
 
 
 const mockDatabaseYears: string[] = ["2025", "2024", "2023", "2022", "2020", "2015", "2010"];
 const mockDatabasePrices: string[] = ["10000", "50000", "100000", "200000", "500000"];
 
-export const Selsector = ({ onSearch, searchLimit }: SelectorProps) => {
+export const Selsector = ({ onSearchCriteria }: SelectorProps) => {
     const [vehicleType, setVehicleType] = useState("");
     const [brand, setBrand] = useState<string | null>(null);
     const [model, setModel] = useState<string | null>(null);
@@ -32,10 +38,6 @@ export const Selsector = ({ onSearch, searchLimit }: SelectorProps) => {
 
     const [brandOptions, setBrandOptions] = useState<string[]>([]);
     const [modelOptions, setModelOptions] = useState<string[]>([]);
-
-    useEffect(() => {
-        onSearch({ page: 0, limit: 10, make: null, model: null, year: null });
-    }, []);
 
     useEffect(() => {
         const fetchMakes = async () => {
@@ -158,7 +160,7 @@ export const Selsector = ({ onSearch, searchLimit }: SelectorProps) => {
 
                 <div style={{ gridColumn: "1/3", gridRow: "4"}}>
                     <button className='search-button'
-                    onClick={() => onSearch({ page: 0, limit: 10, make: brand, model: model, year: null })}
+                    onClick={() => onSearchCriteria({ make: brand, model: model, year: null })}
                     >
                         Pokaż Ogłoszenia
                     </button>

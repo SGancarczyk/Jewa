@@ -5,15 +5,16 @@ import './OfferBoard.css';
 
 interface OfferBoardProps {
     offers: any[];
-    searchLimit: number;
-    onSearchLimit: (limit: number) => void;
+    page: number;
+    onPage: (limit: number) => void;
+    endFlag: boolean;
 }
 
-function OfferBoard({ offers, searchLimit, onSearchLimit }: OfferBoardProps) {
+function OfferBoard({ offers, page, onPage, endFlag }: OfferBoardProps) {
     return (
         <div className='offer-board'>
             <UpperBar />
-            <ContentArea offers={offers} searchLimit={searchLimit} onSearchLimit={onSearchLimit}/>
+            <ContentArea offers={offers} page={page} onPage={onPage} endFlag={endFlag}/>
         </div>
     );
 }

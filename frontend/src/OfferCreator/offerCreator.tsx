@@ -48,7 +48,7 @@ function OfferCreatorPage() {
         }
 
         const payload = {
-            title: "Testowa oferta BMW",
+            title: "Testowa oferta",
             description: "To jest opis testowy ze sztywnych danych.",
             pricePerDay: 150.00,
             vehicleType: "CARS",
