@@ -10,11 +10,10 @@ import { Icon } from '../../Selector/Icons/Icon';
 interface ContentAreaProps {
     offers: any[];
     searchLimit: number
+    onSearchLimit: (limit: number) => void;
 }
 
-function ContentArea({ offers, searchLimit }: ContentAreaProps) {
-    const [expanded, setExpanded] = useState(false);
-
+function ContentArea({ offers, searchLimit, onSearchLimit }: ContentAreaProps) {
     useEffect(() => {
         console.log(offers);
     }, [offers]);
@@ -22,7 +21,7 @@ function ContentArea({ offers, searchLimit }: ContentAreaProps) {
     const showMoreOffers = () => {
         return <button
             className="scroll-toggle-button"
-            onClick={() => setExpanded(true)}
+            onClick={() => onSearchLimit(searchLimit + 10)}
         >
             <span className="button-text">POKAŻ WIĘCEJ</span>
             <div className="button-icon" style={{ marginTop: '0.5rem', marginLeft: '3.5rem' }}>
@@ -46,11 +45,13 @@ function ContentArea({ offers, searchLimit }: ContentAreaProps) {
                 justifyContent: 'center'
 
             }}>
-                {offers.map((offer, index) => (
+                {offers.map((offer) => (
                     <OfferTemplate
-                        key={index}
+                        key={offer.id}
+                        id={offer.id}
                         title={offer.title}
                         price={offer.price}
+                        images={offer.images}
                     />
                 ))}
             </div>

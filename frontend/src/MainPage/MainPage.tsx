@@ -18,7 +18,7 @@ interface SearchCriteria {
 function MainPage() {
     const [offers, setOffers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [searchLimit, setSearchLimit] = useState(20);
+    const [searchLimit, setSearchLimit] = useState(10);
 
     const handleSearch = async (criteria: SearchCriteria) => {
         setIsLoading(true);
