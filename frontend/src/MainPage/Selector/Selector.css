@@ -24,7 +24,8 @@
 }
 
 .search-button:hover {
-    background: #1A1A1A;
+    background: #222222;
+    cursor: pointer;
 }
 
 .container {
@@ -54,7 +55,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 48px;
-    color: #000000;
+    color: black;
 }
 
 .hero-title strong {

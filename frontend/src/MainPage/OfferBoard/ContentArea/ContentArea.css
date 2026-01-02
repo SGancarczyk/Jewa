@@ -1,6 +1,7 @@
 .aaacontent-area {
     background-color: white;
     position: relative;
+    min-height: 350px;
 }
 
 .scroll-toggle-button {
@@ -28,10 +29,23 @@
 }
 
 .scroll-toggle-button .button-icon {
-    display: block; /* teraz flex będzie traktował ikonę jako blok */
+    display: block;
 }
 
 .scroll-toggle-button .button-icon {
-    display: block; /* bardzo ważne, żeby flex traktował ikonę jako blok */
+    display: block;
     margin-top: 2rem;
+}
+
+.brak-ofert-message {
+    align-items: center;
+    margin-top: 4rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 64px;
+    color: black;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

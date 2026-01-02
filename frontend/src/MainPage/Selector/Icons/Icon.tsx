@@ -9,14 +9,15 @@ interface Props {
 };
 
 export const Icon = ({ name, width, height, color = "#1C1B1F" }: Props) => {
+    const iconData = iconPaths[name];
     return <svg
         width={width}
         height={height}
-        viewBox="0 0 31 22"
+        viewBox={iconData.viewBox}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ color: color }}
     >
-        {iconPaths[name]}
+        <path d={iconData.d} fill="currentColor"/>
     </svg>
 }
