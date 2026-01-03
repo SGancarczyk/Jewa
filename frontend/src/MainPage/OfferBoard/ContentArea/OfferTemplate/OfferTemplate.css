@@ -15,7 +15,7 @@
 .offer-card:hover {
     transform: scale(1.03);
 
-    cursor: pointer; /* albo: cursor: crosshair, move, wait, etc. */
+    cursor: pointer;
 }
 
 .empty-image {

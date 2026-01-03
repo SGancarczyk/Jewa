@@ -40,16 +40,6 @@ export const Header = () => {
     }, [])
 
     const getButtons = () => {
-        // if (isLoading) {
-        //     return <div style={{ display: 'flex', alignItems: 'center' }}>
-        //             <ClipLoader
-        //                 loading={true}
-        //                 color="#000000"
-        //                 size={30}
-        //                 speedMultiplier={1}
-        //             />
-        //         </div>
-        // }
         if (userData) {
             return <>
                 <button className="nav-button">
@@ -79,9 +69,12 @@ export const Header = () => {
 
     return (
         <header className="header-container">
-            <div className="logo-wrapper">
+            <button
+                className="logo-wrapper"
+                onClick={() => navigate("/")}
+            >
                 <span className="logo-text">JEVA</span>
-            </div>
+            </button>
 
             <div className="buttons-wrapper">
                 {getButtons()}

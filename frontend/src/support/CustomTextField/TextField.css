@@ -1,0 +1,49 @@
+.custom-textfield .MuiOutlinedInput-root {
+  height: 58px !important;
+  border-radius: 12px !important;
+  background-color: #FFFFFF !important;
+  font-family: 'Inter', sans-serif !important;
+  padding: 0 14px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Styl tekstu wewnątrz */
+.custom-textfield .MuiOutlinedInput-input {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important; /* Fix dla Safari/Chrome autofill */
+  font-weight: 500 !important;
+  padding: 0 !important;
+  height: 100% !important;
+  text-align: auto center !important;
+}
+
+/* Styl etykiety (Label) w stanie spoczynku */
+.custom-textfield .MuiInputLabel-root {
+  color: #888888 !important;
+  top: 3px !important;
+}
+
+/* Styl etykiety, gdy klikniemy w pole (ucieka do góry) */
+.custom-textfield .MuiInputLabel-root.Mui-focused,
+.custom-textfield .MuiInputLabel-root.MuiFormLabel-filled {
+  color: #000000 !important;
+  top: 0px !important;
+}
+
+/* Styl samej ramki (szary obrys) */
+.custom-textfield .MuiOutlinedInput-notchedOutline {
+  border-color: #E0E0E0 !important;
+  border-width: 1px !important;
+}
+
+/* Styl ramki po najechaniu myszką (Hover) */
+.custom-textfield .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #B0B0B0 !important;
+}
+
+/* Styl ramki po kliknięciu (Focus) */
+.custom-textfield .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #000000 !important;
+  border-width: 1px !important; /* W Twoim stylu focus ma 1px, domyślnie w MUI jest 2px */
+}

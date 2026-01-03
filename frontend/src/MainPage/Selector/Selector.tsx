@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Selector.css';
 import TypeSelector from './TypeSelector/TypeSelector';
-import { AutocompleteSelector } from './AutocompleteSelect/AutocompleteSelect';
+import { AutocompleteSelector } from '../../support/AutocompleteSelect/AutocompleteSelect';
 
 export interface SearchCriteria {
     make?: string | null;

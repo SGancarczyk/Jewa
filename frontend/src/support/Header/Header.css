@@ -15,6 +15,7 @@
     background: #FAFAFA;
     box-sizing: border-box;
     z-index: 10;
+    margin-bottom: 64px;
 }
 
 .logo-wrapper {
@@ -25,8 +26,15 @@
     padding: 10px;
     gap: 10px;
     background: #FFFFFF;
+    outline: #FFFFFF;
     width: 90px;
     height: 49px;
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.logo-wrapper:hover {
+    transform: scale(1.03);
 }
 
 .logo-text {

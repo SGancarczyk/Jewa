@@ -1,29 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { use, useEffect } from "react";
+import { use, useEffect, useState } from "react";
 import Header from "../support/Header/Header";
 import BottomBar from "../support/BottomBar/BottomBar";
 import './offerCreator.css';
+import CustomTextField from "../support/CustomTextField/TextField";
+
 
 function OfferCreatorPage() {
-    const navigate = useNavigate();
-
     const uploadHardcodedImage = async (offerId: number, token: string) => {
         try {
             console.log(`Rozpoczynam upload zdjęcia dla oferty ID: ${offerId}...`);
-
-            // 1. Pobieramy plik z folderu 'public' naszej aplikacji React
-            // Zakładam, że wrzuciłeś plik 'test-car.jpg' do folderu public!
             const response = await fetch('/test-car.jpg');
-            const blob = await response.blob(); // Zamieniamy go na Blob (plik w pamięci)
-
-            // 2. Tworzymy obiekt File (udajemy, że użytkownik go wybrał)
+            const blob = await response.blob();
             const file = new File([blob], "test-car.jpg", { type: "image/jpeg" });
-
-            // 3. Pakujemy do FormData
             const formData = new FormData();
             formData.append("file", file);
-
-            // 4. Wysyłamy na Twój endpoint
             const uploadRes = await fetch(`http://localhost:8080/api/offers/${offerId}/images`, {
                 method: 'POST',
                 headers: {
@@ -93,14 +84,16 @@ function OfferCreatorPage() {
 
     return (
         <div className="offer-creator-page">
+            <div className="creator-background-image" />
             <Header />
-            <button onClick={() => navigate("/")}>
-                Wróć do strony głównej
-            </button>
+            <div className="creator-container">
+                <h1 className="hero-title">Tworzenie nowej <strong>oferty</strong></h1>
+                <CustomTextField label="Tytuł ogłoszenia" placeholder="Tu podaj tytuł..." style={{width: "60%"}} />
+            </div>
 
-            <button onClick={handleAddOffer}>
-                Dodaj ofertę
-            </button>
+            <div className="creator-container">
+                <h1 className="hero-title">Dodaj <strong>obrazy</strong></h1>
+            </div>
             <BottomBar />
         </div>
     );
