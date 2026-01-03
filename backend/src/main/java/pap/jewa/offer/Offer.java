@@ -40,6 +40,10 @@ public class Offer {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
+    @Column(name = "is_active")
+    private boolean isActive = true;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id", nullable = false)
     @JsonIgnoreProperties({"password", "role", "tokens"})
