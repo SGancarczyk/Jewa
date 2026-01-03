@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ContentArea.css';
-import OfferTemplate from './OfferTemplate/OfferTemplate';
+import OfferTemplate from '../../../support/OfferTemplate/OfferTemplate';
 import { Icon } from '../../../Icons/Icon';
 
 // const mockDatabase = [

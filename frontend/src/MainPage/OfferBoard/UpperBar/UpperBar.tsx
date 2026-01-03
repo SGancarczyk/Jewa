@@ -1,6 +1,7 @@
 import React from 'react';
 import './UpperBar.css';
 import { useNavigate } from 'react-router-dom';
+import { Icon } from '../../../Icons/Icon';
 
 function UpperBar() {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ function UpperBar() {
                 className="add-offer-button"
                 onClick={() => navigate("/offerCreator")}
             >
+                <Icon name="addCircle" width={24} height={24} color="#ffffff"/>
                 Dodaj Ogłoszenie
             </button>
         </div>
