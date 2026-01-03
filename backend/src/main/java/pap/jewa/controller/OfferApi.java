@@ -51,6 +51,7 @@ public class OfferApi {
         Pageable pageable = PageRequest.of(pageNum, limit, Sort.by("createdAt").descending());
 
         Specification<Offer> spec = Specification.allOf(
+                OfferSpecifications.hasId(request.getId()),
                 OfferSpecifications.hasProductionYear(request.getYear()),
                 OfferSpecifications.hasModel(request.getModel()),
                 OfferSpecifications.hasMake(request.getMake()),
@@ -73,6 +74,16 @@ public class OfferApi {
     public ResponseEntity<?> uploadImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file) throws IOException {
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Offer not found"));
+
+        // Ensure file is not empty
+        if (file.isEmpty()) return ResponseEntity.badRequest().body("File is empty");
+
+        // Validate file type
+        String contentType = file.getContentType();
+        List<String> allowedTypes = List.of("image/jpeg", "image/png", "image/jpg");
+        if (contentType == null || !allowedTypes.contains(contentType.toLowerCase())) {
+            return ResponseEntity.status(403).body("Invalid file type. Only JPG/PNG allowed.");
+        }
 
         // Ensure dir uploads exists.
         if (!Files.exists(fileStorageLocation)) {
@@ -103,6 +114,13 @@ public class OfferApi {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Offer> getOfferById(@PathVariable Long id) {
+        return offerRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/images/{fileName}")
     public ResponseEntity<Resource> getImage(@PathVariable String fileName) {
         try {
@@ -122,5 +140,37 @@ public class OfferApi {
         } catch (IOException e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateOffer(@PathVariable Long id, @RequestBody Offer req) {
+        return offerRepository.findById(id).map(offer -> {
+            // Aktualizujemy to, co ważne:
+            offer.setTitle(req.getTitle());
+            offer.setDescription(req.getDescription());
+            offer.setPricePerDay(req.getPricePerDay());
+            offer.setActive(req.isActive()); // To pozwala zamknąć ofertę przez API
+
+            offerRepository.save(offer);
+            return ResponseEntity.ok(offer);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteOffer(@PathVariable Long id) {
+        if (!offerRepository.existsById(id)) return ResponseEntity.notFound().build();
+        offerRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/images/{imageId}")
+    public ResponseEntity<?> deleteImage(@PathVariable Long imageId) {
+        return imageRepository.findById(imageId).map(img -> {
+            try { Files.deleteIfExists(fileStorageLocation.resolve(img.getFileName())); }
+            catch (IOException e) { e.printStackTrace(); }
+
+            imageRepository.delete(img);
+            return ResponseEntity.noContent().build();
+        }).orElse(ResponseEntity.notFound().build());
     }
 }
