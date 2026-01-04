@@ -68,6 +68,12 @@ public class Offer {
     @Column(name = "fuel_type")
     private FuelType fuelType;
 
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
+    private String address;
+
     @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OfferImage> images;
 }

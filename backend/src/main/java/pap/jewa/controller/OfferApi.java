@@ -71,7 +71,7 @@ public class OfferApi {
     }
 
     @PostMapping(value = "/{id}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadImage(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException {
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Offer not found"));
 
@@ -149,8 +149,9 @@ public class OfferApi {
             offer.setTitle(req.getTitle());
             offer.setDescription(req.getDescription());
             offer.setPricePerDay(req.getPricePerDay());
-            offer.setActive(req.isActive()); // To pozwala zamknąć ofertę przez API
-
+            offer.setActive(req.isActive());
+            offer.setCity(req.getCity());
+            offer.setAddress(req.getAddress());
             offerRepository.save(offer);
             return ResponseEntity.ok(offer);
         }).orElse(ResponseEntity.notFound().build());
