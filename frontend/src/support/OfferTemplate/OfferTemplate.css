@@ -14,8 +14,6 @@
 
 .offer-card:hover {
     transform: scale(1.03);
-
-    cursor: pointer;
 }
 
 .empty-image {
@@ -25,7 +23,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #666666;
     font-family: 'Inter', sans-serif;
     font-size: 1.5rem;
     font-weight: 900;

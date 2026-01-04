@@ -2,7 +2,7 @@ import React from 'react';
 import './OfferTemplate.css';
 import { Icon } from '../../Icons/Icon';
 import { useEffect, useState } from 'react';
-import PlaceholderImage from './PlaceholderImage';
+import { PlaceholderImage } from './PlaceholderImage';
 
 interface OfferTemplateProps {
     id: number;
