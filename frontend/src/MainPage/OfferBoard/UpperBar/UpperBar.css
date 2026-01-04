@@ -1,17 +1,42 @@
 .upper-bar {
+    position: relative;
+    font-family: 'Inter', sans-serif;
     width: 100%;
     background-color: white;
     display: flex;
     align-items: center;
-    padding-top: 13vh;
-    padding-bottom: 7vh;
+    padding-top: 11vh;
+    padding-bottom: 8vh;
     border-bottom: 2px solid #ccc;
-    z-index: 1;
+    padding-right: 5vh;
 }
 
-.page-title-main {
-    font-size: clamp(20px, 4vw, 60px);
+.upper-title {
+    font-size: 48px;
     font-weight: bold;
     color: black;
+    font-weight: 900;
     margin: 0;
+}
+
+.add-offer-button {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+    width: 355px;
+    background: #000000;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    transition: all 0.15s ease;
+    gap: 5px;
+}
+
+.add-offer-button:hover {
+    background: #222222;
+    cursor: pointer;
 }

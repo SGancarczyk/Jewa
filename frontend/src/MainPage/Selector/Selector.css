@@ -24,16 +24,16 @@
 }
 
 .search-button:hover {
-    background: #1A1A1A;
+    background: #222222;
+    cursor: pointer;
 }
 
 .container {
     position: relative;
 
-    margin-top: 128px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 25vh;
+    margin-bottom: 128px;
 
     width: 85%;
     max-width: 1351px;
@@ -54,7 +54,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 48px;
-    color: #000000;
+    color: black;
 }
 
 .hero-title strong {

@@ -1,0 +1,8 @@
+.content-area-offer-page {
+    height: 70vh;
+    display: flex;
+    padding: 1.5vw;
+    background-color: white;/* automatycznie wypełnia pozostałą przestrzeń */
+    overflow-y: auto;
+    overflow-x: auto;
+}

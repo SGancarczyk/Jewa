@@ -1,0 +1,64 @@
+.FullInformationContainer {
+    width: 1000px;
+    height: 600px;
+}
+
+.name-holder {
+    padding: 0px;
+    height: 10%;
+    width: 100%;
+    border: 2px solid #333;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dual-holder-upper {
+    display: flex;
+    padding: 0px;
+    align-items: flex-start;
+    height: 65%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.dual-holder-lower {
+    display: flex;
+    padding: 0px;
+    height: 25%;
+    width: 100%;
+    align-items: flex-start;
+    overflow-y: auto;
+}
+
+.desc-holder {
+    padding: 0px;
+    height: 100%;
+    width: 75%;
+    border: 2px solid #333;
+}
+
+.buy-button {
+    height: 100%;
+    width: 25%;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background-color: #45a049;
+    
+}
+
+.desc-holder h2 {
+    margin: 0;
+}
+
+.desc-holder p {
+    margin: 0;
+}
+
