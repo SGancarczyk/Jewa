@@ -10,6 +10,13 @@ import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
 function OfferCreatorPage() {
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        return () => {
+            selectedImages.forEach(image => URL.revokeObjectURL(image.previewUrl));
+        };
+    }, []);
+
     const uploadImage = async (offerId: number, token: string, file: File) => {
         try {
             console.log(`Rozpoczynam upload wybranego zdjęcia dla oferty ID: ${offerId}...`);

@@ -14,6 +14,10 @@ function MainPage() {
     const [endFlag, setEndFlag] = useState(false);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         setPage(0);
     }, [searchCriteria]);
 

@@ -16,12 +16,6 @@ function SelectedImagesDisplay({ selectedImages, setSelectedImages }: SelectedIm
     const fileInputRef = useRef<HTMLInputElement>(null);
     const MAX_IMAGES = 8;
 
-    useEffect(() => {
-        return () => {
-            selectedImages.forEach(image => URL.revokeObjectURL(image.previewUrl));
-        };
-    }, []);
-
     const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             const newFiles = Array.from(event.target.files).slice(0, MAX_IMAGES - selectedImages.length);
