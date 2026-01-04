@@ -160,7 +160,7 @@ export const Selsector = ({ onSearchCriteria }: SelectorProps) => {
 
                 <div style={{ gridColumn: "1/3", gridRow: "4"}}>
                     <button className='search-button'
-                    onClick={() => onSearchCriteria({ make: brand, model: model, year: null })}
+                    onClick={() => onSearchCriteria({ vehicleType: vehicleType, make: brand, model: model, year: null })}
                     >
                         Pokaż Ogłoszenia
                     </button>

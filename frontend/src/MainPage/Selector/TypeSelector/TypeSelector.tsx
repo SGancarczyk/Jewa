@@ -11,9 +11,9 @@ interface VehicleOption {
 }
 
 const options: VehicleOption[] = [
-    { id: 'personal', label: 'osobowe', icon: 'car' },
-    { id: 'truck', label: 'ciężarowe', icon: 'truck' },
-    { id: 'construction', label: 'budowlane', icon: 'construction' },
+    { id: 'CARS', label: 'osobowe', icon: 'car' },
+    { id: 'TRUCKS', label: 'ciężarowe', icon: 'truck' },
+    { id: 'CONSTRUCTION', label: 'budowlane', icon: 'construction' },
 ];
 
 interface Props {
