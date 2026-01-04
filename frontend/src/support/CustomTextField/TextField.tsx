@@ -9,9 +9,10 @@ interface CustomTextFieldProps {
     style?: React.CSSProperties;
     label: string;
     placeholder?: string
+    onChange?: (newValue: string) => void;
 }
 
-function CustomTextField({ minLength = 16, maxLength = 70, style, label, placeholder }: CustomTextFieldProps) {
+function CustomTextField({ minLength = 16, maxLength = 70, style, label, placeholder, onChange = () => {} }: CustomTextFieldProps) {
   const [title, setTitle] = useState('');
 
   const isError = title.length > 0 && (title.length < minLength || title.length > maxLength);
@@ -30,7 +31,10 @@ function CustomTextField({ minLength = 16, maxLength = 70, style, label, placeho
         label={label}
         placeholder={placeholder}
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          onChange(e.target.value);
+        }}
         error={isError}
         helperText={helperText}
         style={style}

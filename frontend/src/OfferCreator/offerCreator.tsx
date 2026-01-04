@@ -9,6 +9,7 @@ import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
 
 function OfferCreatorPage() {
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
+    const [title, setTitle] = useState<string>("");
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -51,7 +52,7 @@ function OfferCreatorPage() {
         }
 
         const payload = {
-            title: "Testowa oferta",
+            title: { title },
             description: "To jest opis testowy ze sztywnych danych + wybrane zdjęcie.",
             pricePerDay: 150.00,
             vehicleType: "CARS",
@@ -101,7 +102,13 @@ function OfferCreatorPage() {
 
             <div className="creator-container">
                 <h1 className="hero-title">Tworzenie nowej <strong>oferty</strong></h1>
-                <CustomTextField label="Tytuł ogłoszenia" placeholder="Tu podaj tytuł..." style={{width: "60%"}} />
+                <CustomTextField
+                    label="Tytuł ogłoszenia"
+                    placeholder="Tu podaj tytuł..."
+                    style={{width: "60%"}}
+                    onChange={setTitle}
+                    minLength={ 10 }
+                />
             </div>
 
             <div className="creator-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
