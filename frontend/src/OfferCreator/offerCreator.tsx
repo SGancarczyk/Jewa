@@ -4,17 +4,19 @@ import Header from "../support/Header/Header";
 import BottomBar from "../support/BottomBar/BottomBar";
 import './offerCreator.css';
 import CustomTextField from "../support/CustomTextField/TextField";
-
+import SelectedImagesDisplay from "./SelectedImagesDisplay/SelectedImagesDisplay";
+import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
 
 function OfferCreatorPage() {
-    const uploadHardcodedImage = async (offerId: number, token: string) => {
+    const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
+
+    const uploadImage = async (offerId: number, token: string, file: File) => {
         try {
-            console.log(`Rozpoczynam upload zdjęcia dla oferty ID: ${offerId}...`);
-            const response = await fetch('/test-car.jpg');
-            const blob = await response.blob();
-            const file = new File([blob], "test-car.jpg", { type: "image/jpeg" });
+            console.log(`Rozpoczynam upload wybranego zdjęcia dla oferty ID: ${offerId}...`);
+
             const formData = new FormData();
             formData.append("file", file);
+
             const uploadRes = await fetch(`http://localhost:8080/api/offers/${offerId}/images`, {
                 method: 'POST',
                 headers: {
@@ -37,26 +39,24 @@ function OfferCreatorPage() {
     const handleAddOffer = async () => {
         const token = localStorage.getItem("jwtToken");
         if (!token) {
-            console.error("Brak tokena! Zaloguj się najpierw.");
+            alert("Brak tokena! Zaloguj się najpierw.");
             return;
         }
 
         const payload = {
             title: "Testowa oferta",
-            description: "To jest opis testowy ze sztywnych danych.",
+            description: "To jest opis testowy ze sztywnych danych + wybrane zdjęcie.",
             pricePerDay: 150.00,
             vehicleType: "CARS",
             productionYear: 2022,
             bodyType: "SUV",
             fuelType: "DIESEL",
-            model: {
-                id: 1
-            },
+            model: { id: 1 },
             images: []
         };
 
         try {
-            console.log("Wysyłam payload:", payload); // Podgląd co leci
+            console.log("Tworzę ofertę...", payload);
 
             const response = await fetch('http://localhost:8080/api/offers', {
                 method: 'POST',
@@ -70,8 +70,13 @@ function OfferCreatorPage() {
             if (response.ok) {
                 const data = await response.json();
                 console.log("SUKCES! Oferta utworzona. ID:", data.id);
-                await uploadHardcodedImage(data.id, token);
-                alert("Udało się! Sprawdź bazę danych.");
+
+                selectedImages.forEach(async (imageItem) => {
+                    await uploadImage(data.id, token, imageItem.file);
+                });
+
+                alert("Udało się! Oferta i zdjęcie dodane.");
+                setSelectedImages([]);
             } else {
                 const errorText = await response.text();
                 console.error("BŁĄD SERWERA:", response.status, errorText);
@@ -86,14 +91,22 @@ function OfferCreatorPage() {
         <div className="offer-creator-page">
             <div className="creator-background-image" />
             <Header />
+
             <div className="creator-container">
                 <h1 className="hero-title">Tworzenie nowej <strong>oferty</strong></h1>
                 <CustomTextField label="Tytuł ogłoszenia" placeholder="Tu podaj tytuł..." style={{width: "60%"}} />
             </div>
 
-            <div className="creator-container">
+            <div className="creator-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <h1 className="hero-title">Dodaj <strong>obrazy</strong></h1>
+                <span>Pierwsze zdjęcie będzie zdjęciem głównym.</span>
+                <SelectedImagesDisplay selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
+
             </div>
+            <button className="submit-offer-button" onClick={handleAddOffer}>
+                Dodaj ofertę
+            </button>
+
             <BottomBar />
         </div>
     );
