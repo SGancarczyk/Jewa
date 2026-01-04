@@ -9,7 +9,7 @@ import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
 
 function OfferCreatorPage() {
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
-    const [title, setTitle] = useState<string>("");
+    const [offerTitle, setOfferTitle] = useState<string>("");
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -52,7 +52,7 @@ function OfferCreatorPage() {
         }
 
         const payload = {
-            title: { title },
+            title: offerTitle,
             description: "To jest opis testowy ze sztywnych danych + wybrane zdjęcie.",
             pricePerDay: 150.00,
             vehicleType: "CARS",
@@ -106,7 +106,7 @@ function OfferCreatorPage() {
                     label="Tytuł ogłoszenia"
                     placeholder="Tu podaj tytuł..."
                     style={{width: "60%"}}
-                    onChange={setTitle}
+                    onChange={setOfferTitle}
                     minLength={ 10 }
                 />
             </div>
