@@ -40,11 +40,6 @@ public class OfferApi {
         int pageNum = request.getPage();
         int limit = request.getLimit();
 
-        int year = request.getYear();
-        String make = request.getMake();
-        String model = request.getModel();
-        VehicleType vehicleType = request.getVehicleType();
-
         if (limit <= 0) limit = 40;
         if (pageNum < 0) pageNum = 0;
 
