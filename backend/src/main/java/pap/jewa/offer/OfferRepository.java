@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OfferRepository extends JpaRepository<Offer, Integer> {
+public interface OfferRepository extends JpaRepository<Offer, Long> {
     Page<Offer> findByProductionYear(int year, Pageable pageable);
     Page<Offer> findByModel_Name(String model, Pageable pageable);
     Page<Offer> findByProductionYearAndModel_Name(int year, String model, Pageable pageable);

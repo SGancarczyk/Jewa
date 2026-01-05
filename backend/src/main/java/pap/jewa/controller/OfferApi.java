@@ -51,6 +51,7 @@ public class OfferApi {
         Pageable pageable = PageRequest.of(pageNum, limit, Sort.by("createdAt").descending());
 
         Specification<Offer> spec = Specification.allOf(
+                OfferSpecifications.hasId(request.getId()),
                 OfferSpecifications.hasProductionYear(request.getYear()),
                 OfferSpecifications.hasModel(request.getModel()),
                 OfferSpecifications.hasMake(request.getMake()),
@@ -70,16 +71,27 @@ public class OfferApi {
     }
 
     @PostMapping(value = "/{id}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadImage(@PathVariable Long id, @RequestParam("file") MultipartFile file, Authentication authentication) throws IOException {
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Offer not found"));
 
-        // Ensure dir uploads exists.
+        User currentUser = (User) authentication.getPrincipal();
+        if (!isOwnerOrAdmin(offer, currentUser)) {
+            return ResponseEntity.status(403).body("Access denied");
+        }
+
+        if (file.isEmpty()) return ResponseEntity.badRequest().body("File is empty");
+
+        String contentType = file.getContentType();
+        List<String> allowedTypes = List.of("image/jpeg", "image/png", "image/jpg");
+        if (contentType == null || !allowedTypes.contains(contentType.toLowerCase())) {
+            return ResponseEntity.status(403).body("Invalid file type. Only JPG/PNG allowed.");
+        }
+
         if (!Files.exists(fileStorageLocation)) {
             Files.createDirectories(fileStorageLocation);
         }
 
-        // Generate unique name
         String originalFileName = file.getOriginalFilename();
         String fileExtension = "";
         if (originalFileName!= null && originalFileName.contains(".")) {
@@ -87,11 +99,9 @@ public class OfferApi {
         }
         String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
 
-        // Copy image to hard drive
         Path targetLocation = fileStorageLocation.resolve(uniqueFileName);
         Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-        // Save file info to database
         OfferImage image = OfferImage.builder()
                 .fileName(uniqueFileName)
                 .contentType(file.getContentType())
@@ -101,6 +111,13 @@ public class OfferApi {
 
         imageRepository.save(image);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Offer> getOfferById(@PathVariable Long id) {
+        return offerRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/images/{fileName}")
@@ -122,5 +139,63 @@ public class OfferApi {
         } catch (IOException e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateOffer(@PathVariable Long id, @RequestBody Offer req, Authentication authentication) {
+        return offerRepository.findById(id).map(offer -> {
+
+            User currentUser = (User) authentication.getPrincipal();
+
+            if (!isOwnerOrAdmin(offer, currentUser)) {
+                return ResponseEntity.status(403).build();
+            }
+
+            offer.setTitle(req.getTitle());
+            offer.setDescription(req.getDescription());
+            offer.setPricePerDay(req.getPricePerDay());
+            offer.setActive(req.isActive());
+            offer.setCity(req.getCity());
+            offer.setAddress(req.getAddress());
+            offerRepository.save(offer);
+            return ResponseEntity.ok(offer);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteOffer(@PathVariable Long id, Authentication authentication) {
+        return offerRepository.findById(id).map(offer -> {
+            User currentUser = (User) authentication.getPrincipal();
+
+            if (!isOwnerOrAdmin(offer, currentUser)) {
+                return ResponseEntity.status(403).build();
+            }
+
+            offerRepository.delete(offer);
+            return ResponseEntity.noContent().build();
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/images/{imageId}")
+    public ResponseEntity<?> deleteImage(@PathVariable Long imageId, Authentication authentication) {
+        return imageRepository.findById(imageId).map(img -> {
+            User currentUser = (User) authentication.getPrincipal();
+
+            if (!isOwnerOrAdmin(img.getOffer(), currentUser)) {
+                return ResponseEntity.status(403).build();
+            }
+
+            try { Files.deleteIfExists(fileStorageLocation.resolve(img.getFileName())); }
+            catch (IOException e) { e.printStackTrace(); }
+
+            imageRepository.delete(img);
+            return ResponseEntity.noContent().build();
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    private boolean isOwnerOrAdmin(Offer offer, User currentUser) {
+        boolean isOwner = offer.getOwner().getUsername().equals(currentUser.getUsername());
+        boolean isAdmin = currentUser.getRole() == pap.jewa.user.Role.ADMIN; // Upewnij się, że masz import do Role
+        return isOwner || isAdmin;
     }
 }
