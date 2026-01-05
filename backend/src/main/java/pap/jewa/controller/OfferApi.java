@@ -35,6 +35,16 @@ public class OfferApi {
 
     private final Path fileStorageLocation = Paths.get("uploads").toAbsolutePath().normalize();
 
+    Specification<Offer> getFilterSpecification(OfferSearchRequest request) {
+        return Specification.allOf(
+                OfferSpecifications.hasId(request.getId()),
+                OfferSpecifications.hasProductionYear(request.getYear()),
+                OfferSpecifications.hasModel(request.getModel()),
+                OfferSpecifications.hasMake(request.getMake()),
+                OfferSpecifications.hasVehicleType(request.getVehicleType())
+        );
+    }
+
     @PostMapping("/get_offers")
     public ResponseEntity<List<Offer>> getOffers(@RequestBody OfferSearchRequest request) {
         int pageNum = request.getPage();
@@ -45,18 +55,24 @@ public class OfferApi {
 
         Pageable pageable = PageRequest.of(pageNum, limit, Sort.by("createdAt").descending());
 
-        Specification<Offer> spec = Specification.allOf(
-                OfferSpecifications.hasId(request.getId()),
-                OfferSpecifications.hasProductionYear(request.getYear()),
-                OfferSpecifications.hasModel(request.getModel()),
-                OfferSpecifications.hasMake(request.getMake()),
-                OfferSpecifications.hasVehicleType(request.getVehicleType())
-        );
+        Specification<Offer> spec = getFilterSpecification(request);
 
         Page<Offer> page = offerRepository.findAll(spec, pageable);
 
         return ResponseEntity.ok(page.getContent());
     }
+
+    @PostMapping("/count")
+    public ResponseEntity<OfferCountResponse> getOffersCount(
+            @RequestBody OfferSearchRequest request) {
+
+        Specification<Offer> spec = getFilterSpecification(request);
+
+        long count = offerRepository.count(spec);
+
+        return ResponseEntity.ok(new OfferCountResponse(count));
+    }
+
 
     @PostMapping
     public ResponseEntity<Offer> createOffer(@RequestBody Offer offer, Authentication authentication) {
