@@ -45,3 +45,33 @@
     row-gap: 36px;
     margin-bottom: 20px;
 }
+
+.submit-offer-button {
+    position: relative;
+
+    margin-bottom: 32px;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 90%;
+
+    background: black;
+    border-radius: 16px;
+
+    padding: 16px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+
+    transition: transform 0.2s ease;
+}
+
+.submit-offer-button:hover {
+    background: #111111;
+}

@@ -64,9 +64,14 @@ function OfferCreatorPage() {
             return;
         }
 
+        if (descFieldData.value.length < descFieldData.minLength || descFieldData.value.length > descFieldData.maxLength) {
+            alert(`Opis oferty musi mieć od ${descFieldData.minLength} do ${descFieldData.maxLength} znaków.`);
+            return;
+        }
+
         const payload = {
             title: titleFieldData.value,
-            description: "To jest opis testowy ze sztywnych danych + wybrane zdjęcie.",
+            description: descFieldData.value,
             pricePerDay: 150.00,
             vehicleType: "CARS",
             productionYear: 2022,
@@ -139,7 +144,7 @@ function OfferCreatorPage() {
 
             <AutoGuard>
                 <button className="submit-offer-button" onClick={handleAddOffer}>
-                    Dodaj ofertę
+                    Dodaj ogłoszenie
                 </button>
             </AutoGuard>
 
