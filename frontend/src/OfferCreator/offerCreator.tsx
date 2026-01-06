@@ -6,10 +6,13 @@ import './offerCreator.css';
 import CustomTextField from "../support/CustomTextField/TextField";
 import SelectedImagesDisplay from "./SelectedImagesDisplay/SelectedImagesDisplay";
 import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
+import { AutoGuard } from "../support/AutoGuard/AutoGuard";
 
 function OfferCreatorPage() {
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
     const [offerTitle, setOfferTitle] = useState<string>("");
+    const MIN_LENGTH = 10;
+    const MAX_LENGTH = 40;
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -48,6 +51,11 @@ function OfferCreatorPage() {
         const token = localStorage.getItem("jwtToken");
         if (!token) {
             alert("Brak tokena! Zaloguj się najpierw.");
+            return;
+        }
+
+        if (offerTitle.length < MIN_LENGTH || offerTitle.length > MAX_LENGTH) {
+            alert(`Tytuł oferty musi mieć od ${MIN_LENGTH} do ${MAX_LENGTH} znaków.`);
             return;
         }
 
@@ -107,19 +115,22 @@ function OfferCreatorPage() {
                     placeholder="Tu podaj tytuł..."
                     style={{width: "60%"}}
                     onChange={setOfferTitle}
-                    minLength={ 10 }
+                    minLength={MIN_LENGTH}
+                    maxLength={MAX_LENGTH}
                 />
             </div>
 
-            <div className="creator-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div className="creator-container">
                 <h1 className="hero-title">Dodaj <strong>obrazy</strong></h1>
                 <span>Pierwsze zdjęcie będzie zdjęciem głównym.</span>
                 <SelectedImagesDisplay selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
 
             </div>
-            <button className="submit-offer-button" onClick={handleAddOffer}>
-                Dodaj ofertę
-            </button>
+            <AutoGuard>
+                <button className="submit-offer-button" onClick={handleAddOffer}>
+                    Dodaj ofertę
+                </button>
+            </AutoGuard>
 
             <BottomBar />
         </div>

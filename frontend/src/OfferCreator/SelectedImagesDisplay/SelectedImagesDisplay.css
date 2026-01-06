@@ -4,6 +4,7 @@
     grid-template-rows: repeat(2, 200px);
     gap: 15px;
     margin-bottom: 32px;
+    margin-top: 20px;
 }
 
 .seleced-image-container {
