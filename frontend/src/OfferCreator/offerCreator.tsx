@@ -3,16 +3,21 @@ import { use, useEffect, useState } from "react";
 import Header from "../support/Header/Header";
 import BottomBar from "../support/BottomBar/BottomBar";
 import './offerCreator.css';
-import CustomTextField from "../support/CustomTextField/TextField";
+import CustomTextField, { useTextField} from "../support/CustomTextField/TextField";
 import SelectedImagesDisplay from "./SelectedImagesDisplay/SelectedImagesDisplay";
 import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
 import { AutoGuard } from "../support/AutoGuard/AutoGuard";
 
 function OfferCreatorPage() {
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
-    const [offerTitle, setOfferTitle] = useState<string>("");
-    const MIN_LENGTH = 10;
-    const MAX_LENGTH = 40;
+
+    const titleFieldData = useTextField(
+        "Tytuł ogłoszenia", "Tu podaj ogłoszenie...", 10, 40, ""
+    )
+
+    const descFieldData = useTextField(
+        "Opis ogłoszenia", "Wpisz te informacje, które byłyby ważne dla ciebie, podczas przeglądania ogłoszenia", 40, 9000, ""
+    )
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -54,13 +59,13 @@ function OfferCreatorPage() {
             return;
         }
 
-        if (offerTitle.length < MIN_LENGTH || offerTitle.length > MAX_LENGTH) {
-            alert(`Tytuł oferty musi mieć od ${MIN_LENGTH} do ${MAX_LENGTH} znaków.`);
+        if (titleFieldData.value.length < titleFieldData.minLength || titleFieldData.value.length > titleFieldData.maxLength) {
+            alert(`Tytuł oferty musi mieć od ${titleFieldData.minLength} do ${titleFieldData.maxLength} znaków.`);
             return;
         }
 
         const payload = {
-            title: offerTitle,
+            title: titleFieldData.value,
             description: "To jest opis testowy ze sztywnych danych + wybrane zdjęcie.",
             pricePerDay: 150.00,
             vehicleType: "CARS",
@@ -111,12 +116,8 @@ function OfferCreatorPage() {
             <div className="creator-container">
                 <h1 className="hero-title">Tworzenie nowej <strong>oferty</strong></h1>
                 <CustomTextField
-                    label="Tytuł ogłoszenia"
-                    placeholder="Tu podaj tytuł..."
-                    style={{width: "60%"}}
-                    onChange={setOfferTitle}
-                    minLength={MIN_LENGTH}
-                    maxLength={MAX_LENGTH}
+                    style={{width: "70%"}}
+                    fieldData={titleFieldData}
                 />
             </div>
 
@@ -124,8 +125,18 @@ function OfferCreatorPage() {
                 <h1 className="hero-title">Dodaj <strong>obrazy</strong></h1>
                 <span>Pierwsze zdjęcie będzie zdjęciem głównym.</span>
                 <SelectedImagesDisplay selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
-
             </div>
+
+            <div className="creator-container">
+                <h1 className="hero-title">Dodaj <strong>opis</strong></h1>
+                <CustomTextField
+                    style={{width: "70%"}}
+                    fieldData={descFieldData}
+                    multiline
+                    rows={11}
+                />
+            </div>
+
             <AutoGuard>
                 <button className="submit-offer-button" onClick={handleAddOffer}>
                     Dodaj ofertę

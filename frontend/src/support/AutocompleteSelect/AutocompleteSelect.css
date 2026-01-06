@@ -1,10 +1,9 @@
 .car-selector-root .MuiOutlinedInput-root {
-  height: 58px !important;
   border-radius: 12px !important;
   background-color: #FFFFFF !important;
   font-family: 'Inter', sans-serif !important;
 
-  padding: 0 14px !important;
+  padding: 20px 14px !important;
   display: flex !important;
   align-items: center !important;
 }
