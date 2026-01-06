@@ -60,7 +60,9 @@ function OfferCreatorPage() {
             bodyType: "SUV",
             fuelType: "DIESEL",
             model: { id: 1 },
-            images: []
+            images: [],
+            city: "Warszawa",
+            address: "ul. Marszałkowska 10",
         };
 
         try {

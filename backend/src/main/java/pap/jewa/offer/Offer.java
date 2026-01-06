@@ -40,6 +40,10 @@ public class Offer {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
+    @Column(name = "is_active")
+    private boolean isActive = true;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id", nullable = false)
     @JsonIgnoreProperties({"password", "role", "tokens"})
@@ -63,6 +67,12 @@ public class Offer {
     @Enumerated(EnumType.STRING)
     @Column(name = "fuel_type")
     private FuelType fuelType;
+
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
+    private String address;
 
     @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OfferImage> images;

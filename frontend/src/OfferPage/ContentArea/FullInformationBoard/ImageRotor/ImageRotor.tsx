@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './ImageRotor.css';
 
-const ImageRotor = ({images}: {images: string[]}) => {
+const ImageRotor = ({images}: {images: any[]}) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);

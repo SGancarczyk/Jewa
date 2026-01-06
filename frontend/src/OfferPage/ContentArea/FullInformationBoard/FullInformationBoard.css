@@ -8,10 +8,11 @@
     height: 10%;
     width: 100%;
     border: 2px solid #333;
-
+    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .dual-holder-upper {
@@ -21,6 +22,7 @@
     height: 65%;
     width: 100%;
     overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .dual-holder-lower {
@@ -37,6 +39,7 @@
     height: 100%;
     width: 75%;
     border: 2px solid #333;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .buy-button {
@@ -47,6 +50,7 @@
     color: white;
     border: 2px solid #333;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .buy-button:hover {
@@ -60,5 +64,9 @@
 
 .desc-holder p {
     margin: 0;
+}
+
+.border-wrapper {
+    border: 2px solid #333;
 }
 

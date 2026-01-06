@@ -1,7 +1,7 @@
 import React from 'react';
 import './InformationPage.css';
 import UpperBar from '../UpperBar/UpperBar';
-import BottomBar from '../BottomBar/BottomBar';
+import BottomBar from '../../support/BottomBar/BottomBar';
 import ContentArea from './ContentArea/ContentArea';
 
 function InformationPage() {
