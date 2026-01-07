@@ -1,4 +1,3 @@
-```markdown
 # Reservation API Documentation
 
 ## Base URL
@@ -32,14 +31,9 @@
 ```json
 {
   "id": 10,
-  "user": null,
-  "offer": {
-    "id": 1,
-    "title": "Sample Offer"
-  },
+  "offerId": 1,
   "startDate": "2026-01-10",
   "endDate": "2026-01-12",
-  "cardToken": null,
   "cardLast4Digits": "1234"
 }
 ```
@@ -70,15 +64,14 @@
 {
   "id": 5,
   "user": {
-    "id": 2,
-    "username": "johndoe"
+    ...
   },
   "offer": {
-    "id": 1,
-    "title": "Sample Offer"
+    ...
   },
   "startDate": "2026-01-10",
-  "endDate": "2026-01-12"
+  "endDate": "2026-01-12",
+  "cardLast4Digits": "1234"
 }
 ```
 
@@ -137,8 +130,7 @@
     "id": 10,
     "user": null,
     "offer": {
-      "id": 1,
-      "title": "Sample Offer"
+      ...
     },
     "startDate": "2026-01-10",
     "endDate": "2026-01-12",
@@ -175,12 +167,10 @@
   {
     "id": 5,
     "user": {
-      "id": 2,
-      "username": "johndoe"
+      ...
     },
     "offer": {
-      "id": 1,
-      "title": "Sample Offer"
+      ...
     },
     "startDate": "2026-01-10",
     "endDate": "2026-01-12"
@@ -194,4 +184,3 @@
 - `404 Not Found` – Offer not found  
 
 ---
-```
