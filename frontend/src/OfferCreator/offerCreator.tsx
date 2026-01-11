@@ -19,6 +19,10 @@ function OfferCreatorPage() {
         "Opis ogłoszenia", "Wpisz te informacje, które byłyby ważne dla ciebie, podczas przeglądania ogłoszenia", 40, 9000, ""
     )
 
+    const priceFieldData = useTextField(
+        "Cena za dzień", "Ile jest warty ten gruz?", 1, 5, "", "zł"
+    )
+
     useEffect(() => {
         window.scrollTo(0, 0);
         return () => {
@@ -139,6 +143,11 @@ function OfferCreatorPage() {
                     fieldData={descFieldData}
                     multiline
                     rows={11}
+                />
+
+                <CustomTextField
+                    style={{width: "30%"}}
+                    fieldData={priceFieldData}
                 />
             </div>
 

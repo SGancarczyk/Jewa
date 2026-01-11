@@ -1,15 +1,16 @@
-import { TextField, type TextFieldProps } from "@mui/material";
+import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 import Box from '@mui/material/Box';
 import { useState, useEffect } from "react";
 import "./TextField.css"
 
 interface TextFieldConfig {
-	label: string
-	placeholder: string
-	minLength: number
-	maxLength: number
-	value: string
+	label: string;
+	placeholder: string;
+	minLength: number;
+	maxLength: number;
+	value: string;
 	onChange: (newValue: string) => void;
+	suffix: string;
 }
 
 export const useTextField = (
@@ -17,7 +18,8 @@ export const useTextField = (
 	placeholder: string,
 	minLength: number = 0,
 	maxLength: number = 100,
-	initialValue: string = ""
+	initialValue: string = "",
+	suffix: string = ""
 ): TextFieldConfig => {
 	const [value, setValue] = useState(initialValue);
 	return {
@@ -26,7 +28,8 @@ export const useTextField = (
 		minLength,
 		maxLength,
 		value,
-		onChange: setValue
+		onChange: setValue,
+		suffix
 	}
 }
 
@@ -39,7 +42,7 @@ function CustomTextField({
 	sx,
 	...props
 }: CustomTextFieldProps) {
-	const { value, label, placeholder, minLength, maxLength, onChange } = fieldData;
+	const { value, label, placeholder, minLength, maxLength, onChange, suffix } = fieldData;
 
 	const currentLength = value.length;
 	const isError = currentLength > 0 && (currentLength < minLength || currentLength > maxLength);
@@ -65,6 +68,9 @@ function CustomTextField({
 				error={isError}
 				helperText={computedHelperText}
 				placeholder={placeholder}
+				InputProps={{
+					endAdornment: suffix ? <InputAdornment position="end">{suffix}</InputAdornment> : null,
+				}}
 				sx={{
 					'& .MuiOutlinedInput-root': {
 						borderRadius: '12px',
