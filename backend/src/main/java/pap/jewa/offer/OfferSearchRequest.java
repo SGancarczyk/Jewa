@@ -9,6 +9,8 @@ public class OfferSearchRequest {
 
     private int limit = 10;
 
+    private Long id;
+
     private VehicleType vehicleType;
 
     private String make;

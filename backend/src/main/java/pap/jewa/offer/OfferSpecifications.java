@@ -33,4 +33,8 @@ public class OfferSpecifications {
                         ? null
                         : cb.equal(root.get("vehicleType"), type);
     }
+
+    public static Specification<Offer> hasId(Long id) {
+        return (root, query, cb) -> (id == null) ? null : cb.equal(root.get("id"), id);
+    }
 }
