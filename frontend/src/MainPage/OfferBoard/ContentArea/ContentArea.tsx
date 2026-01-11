@@ -50,8 +50,8 @@ function ContentArea({ offers, page, onPage, endFlag }: ContentAreaProps) {
                     <OfferTemplate
                         key={index}
                         id={offer.id}
-                        title={offer.title}
-                        price={offer.price}
+                        title={`${offer.model.make.name} ${offer.model.name}`}
+                        price={offer.pricePerDay}
                         images={offer.images}
                     />
                 ))}

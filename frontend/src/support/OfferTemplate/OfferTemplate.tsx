@@ -10,6 +10,7 @@ interface OfferTemplateProps {
     title: string;
     price: string;
     images: any[];
+
 }
 
 function OfferTemplate({ id, title, price, images }: OfferTemplateProps) {
@@ -19,14 +20,17 @@ function OfferTemplate({ id, title, price, images }: OfferTemplateProps) {
     const navigate = useNavigate();
 
     return (
-        
+
         <div className="offer-card" onClick={
             () => navigate(`/offer/${id}`)
         }>
             {images.length > 0 ? importImage(images[0]!) : <PlaceholderImage />}
             <div className="offer-info">
-                <h2 className="offer-title">{title}</h2>
-                <p className="offer-price">{price}</p>
+                <span className="offer-title">{title}</span>
+                <div>
+                    <dt>2020</dt>
+                </div>
+                <h1 className="offer-price">{price} <small>zł/dzień</small></h1>
             </div>
         </div>
     );
