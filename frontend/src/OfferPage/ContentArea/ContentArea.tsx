@@ -3,7 +3,7 @@ import './ContentArea.css';
 import ImageSlider from './FullInformationBoard/ImageRotor/ImageRotor';
 import InformationField from './FullInformationBoard/InformationField/InformationField';
 import FullInformationBoard from './FullInformationBoard/FullInformationBoard';
-import PersonalInfoBoard from './PersonalInfoBoard/PersonalInfoBoard';
+import PersonalInfoBoard from './PersonalInfoBoard/PersonalInfoInfo';
 
 interface OfferImage {
     id: number;
@@ -44,10 +44,10 @@ interface Offer {
 }
 
 function ContentArea({ id }: { id: number }) {
-    
+
     const [offer, setOffer] = useState<Offer | null>(null);
     const [loading, setLoading] = useState(true);
-    
+
     useEffect(() => {
         fetch("http://localhost:8080/api/offers/get_offers", {
             method: "POST",
@@ -69,16 +69,15 @@ function ContentArea({ id }: { id: number }) {
     if (loading) return <div>Ładowanie...</div>;
     if (!offer) return <div>Brak oferty</div>;
 
-    
+
 
     return (
         <div className="content-area-offer-page">
-            <div className="offer-page-background-image" />
             <div className="full-information-wrapper">
                 <FullInformationBoard offer={offer} />
             </div>
             <div className="personal-information-wrapper">
-                <PersonalInfoBoard  
+                <PersonalInfoBoard
                     username={offer.owner.username}
                     firstName={offer.owner.firstName}
                     lastName={offer.owner.lastName}

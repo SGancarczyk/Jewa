@@ -7,8 +7,12 @@ import CustomTextField, { useTextField} from "../support/CustomTextField/TextFie
 import SelectedImagesDisplay from "./SelectedImagesDisplay/SelectedImagesDisplay";
 import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
 import { AutoGuard } from "../support/AutoGuard/AutoGuard";
+import DataSelsector from "./TechnicalDataSelector/TechnicalDataSelector";
+import { type UploadCriteria } from "./TechnicalDataSelector/TechnicalDataSelector";
+
 
 function OfferCreatorPage() {
+    const [uploadData, setUploadData] = useState<UploadCriteria>({});
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
 
     const titleFieldData = useTextField(
@@ -73,15 +77,24 @@ function OfferCreatorPage() {
             return;
         }
 
+        if (!uploadData.modelId) {
+            alert("model pojazdu musi zostać wybrany!");
+            return
+        }
+
+        if (!uploadData.vehicleType) {
+            alert("Typ pojazdu musi zostać wybrany!")
+        }
+
         const payload = {
             title: titleFieldData.value,
             description: descFieldData.value,
             pricePerDay: 150.00,
-            vehicleType: "CARS",
+            vehicleType: uploadData.vehicleType,
             productionYear: 2022,
             bodyType: "SUV",
             fuelType: "DIESEL",
-            model: { id: 1 },
+            model: { id: uploadData.modelId },
             images: [],
             city: "Warszawa",
             address: "ul. Marszałkowska 10",
@@ -151,6 +164,10 @@ function OfferCreatorPage() {
                     style={{width: "30%"}}
                     fieldData={priceFieldData}
                 />
+            </div>
+
+            <div className="creator-container">
+                <DataSelsector onUploadCriteria={setUploadData}/>
             </div>
 
             <AutoGuard>

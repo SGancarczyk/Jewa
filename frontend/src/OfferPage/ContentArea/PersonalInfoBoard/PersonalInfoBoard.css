@@ -1,3 +1,12 @@
+.Personal-info-board {
+    width: 100%;
+    height: 600px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .PersonalInfoContainer {
     width: 600px;
     height: 600px;

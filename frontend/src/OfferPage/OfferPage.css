@@ -1,0 +1,16 @@
+.offer-page-background-image {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(assets/background_image3.png);
+  background-size: cover;
+  background-position: center -270px;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.offer-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
