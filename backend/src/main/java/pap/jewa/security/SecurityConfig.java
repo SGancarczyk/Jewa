@@ -65,8 +65,12 @@ public class SecurityConfig {
                                     .hasAnyRole("USER", "ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/api/reservation/get_pending/*")
                                     .hasAnyRole("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/reservation/get_pending")
+                                .hasAnyRole("USER", "ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/api/reservation/get_reservations/*").permitAll()
-                                    .anyRequest().hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/reservation/get_reservations")
+                                    .hasAnyRole("USER", "ADMIN")
+                                .anyRequest().hasRole("ADMIN")
                 )
                 .sessionManagement(sess -> sess
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
