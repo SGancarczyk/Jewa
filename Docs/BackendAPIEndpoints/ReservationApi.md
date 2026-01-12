@@ -46,6 +46,32 @@
 
 ---
 
+### Get Users Requested Reservations
+
+**POST** `/get_requested`
+
+**Description:** Retrieve all pending reservations created by the logged-in user.
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "id": 10,
+    "user": null,
+    "offer": {
+      ...
+    },
+    "startDate": "2026-01-10",
+    "endDate": "2026-01-12",
+    "cardLast4Digits": "1234"
+  },
+  ...
+]
+```
+
+---
+
 ### Accept a Pending Reservation
 
 **POST** `/accept/{pendingReservationId}`
@@ -166,17 +192,10 @@
     },
     "startDate": "2026-01-10",
     "endDate": "2026-01-12",
-    "cardToken": null,
     "cardLast4Digits": "1234"
   }
 ]
 ```
-
-**Possible Errors:**
-
-- `400 Bad Request` – Missing offerId  
-- `403 Forbidden` – Offer does not belong to the user  
-- `404 Not Found` – Offer not found  
 
 ---
 
