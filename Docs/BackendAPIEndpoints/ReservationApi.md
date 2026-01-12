@@ -8,7 +8,7 @@
 
 ## Endpoints
 
-### 1. Request a Pending Reservation
+### Request a Pending Reservation
 
 **POST** `/request`
 
@@ -46,7 +46,7 @@
 
 ---
 
-### 2. Accept a Pending Reservation
+### Accept a Pending Reservation
 
 **POST** `/accept/{pendingReservationId}`
 
@@ -84,7 +84,7 @@
 
 ---
 
-### 3. Decline a Pending Reservation
+### Decline a Pending Reservation
 
 **POST** `/decline/{pendingReservationId}`
 
@@ -110,7 +110,7 @@
 
 ---
 
-### 4. Get Pending Reservations
+### Get Pending Reservations
 
 **POST** `/get_pending/{offerId}`
 
@@ -148,7 +148,39 @@
 
 ---
 
-### 5. Get Confirmed Reservations
+### Get Users Pending Reservations
+
+**POST** `/get_pending`
+
+**Description:** Retrieve all pending reservations concerning offers owned by the logged-in user.
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "id": 10,
+    "user": null,
+    "offer": {
+      ...
+    },
+    "startDate": "2026-01-10",
+    "endDate": "2026-01-12",
+    "cardToken": null,
+    "cardLast4Digits": "1234"
+  }
+]
+```
+
+**Possible Errors:**
+
+- `400 Bad Request` – Missing offerId  
+- `403 Forbidden` – Offer does not belong to the user  
+- `404 Not Found` – Offer not found  
+
+---
+
+### Get Confirmed Reservations
 
 **POST** `/get_reservations/{offerId}`
 
@@ -174,7 +206,40 @@
     },
     "startDate": "2026-01-10",
     "endDate": "2026-01-12"
-  }
+  },
+  ...
+]
+```
+
+**Possible Errors:**
+
+- `400 Bad Request` – Missing offerId  
+- `404 Not Found` – Offer not found  
+
+---
+
+### Get Users Confirmed Reservations
+
+**POST** `/get_reservations`
+
+**Description:** Retrieve all confirmed reservations belonging to the logged-in user.  
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "id": 5,
+    "user": {
+      ...
+    },
+    "offer": {
+      ...
+    },
+    "startDate": "2026-01-10",
+    "endDate": "2026-01-12"
+  },
+  ...
 ]
 ```
 
