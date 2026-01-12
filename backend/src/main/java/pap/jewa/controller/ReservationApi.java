@@ -64,7 +64,7 @@ public class ReservationApi {
     }
 
     @PostMapping("/get_reservations/{offerId}")
-    public ResponseEntity<List<Reservation>> getPendingReservation(
+    public ResponseEntity<List<Reservation>> getReservationByOfferId(
             @PathVariable Long offerId
     ) {
         if (offerId == null) {
