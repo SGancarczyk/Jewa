@@ -5,9 +5,9 @@ import pap.jewa.vehicle.VehicleType;
 
 @Data
 public class OfferSearchRequest {
-    private int page = 0;
+    private Integer page = 0;
 
-    private int limit = 10;
+    private Integer limit = 10;
 
     private Long id;
 
@@ -17,5 +17,7 @@ public class OfferSearchRequest {
 
     private String model;
 
-    private int year;
+    private Integer year;
+
+    private Integer ownerId;
 }

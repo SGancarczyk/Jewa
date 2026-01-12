@@ -41,7 +41,8 @@ public class OfferApi {
                 OfferSpecifications.hasProductionYear(request.getYear()),
                 OfferSpecifications.hasModel(request.getModel()),
                 OfferSpecifications.hasMake(request.getMake()),
-                OfferSpecifications.hasVehicleType(request.getVehicleType())
+                OfferSpecifications.hasVehicleType(request.getVehicleType()),
+                OfferSpecifications.hasOwnerId(request.getOwnerId())
         );
     }
 
