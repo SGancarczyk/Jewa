@@ -10,9 +10,10 @@ interface OfferTemplateProps {
     title: string;
     price: string;
     images: any[];
+    jumpLink: string;
 }
 
-function OfferTemplate({ id, title, price, images }: OfferTemplateProps) {
+function OfferTemplate({ id, title, price, images, jumpLink }: OfferTemplateProps) {
     const importImage = (imagePath: any) => {
         return <img src={`http://localhost:8080/api/offers/images/${imagePath.fileName}`} alt={title} className="offer-image" />
     }
@@ -21,7 +22,7 @@ function OfferTemplate({ id, title, price, images }: OfferTemplateProps) {
     return (
         
         <div className="offer-card" onClick={
-            () => navigate(`/offer/${id}`)
+            () => navigate(`/${jumpLink}/${id}`)
         }>
             {images.length > 0 ? importImage(images[0]!) : <PlaceholderImage />}
             <div className="offer-info">

@@ -1,0 +1,37 @@
+.tabs-container {
+  height: 100px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: white;
+}
+
+/* pusta przestrzeń */
+.tabs-content {
+  flex: 1;
+}
+
+/* dolna belka */
+.tabs-footer {
+  display: flex;
+  gap: 32px;
+  padding-left : 120px;
+  padding-bottom: 12px;
+}
+
+/* napisy */
+.tab {
+  cursor: pointer;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  font-weight :500;
+}
+
+/* aktywny */
+.tab.active {
+  font-weight: bold;
+  border-bottom: 3px solid rgb(0, 0, 0);
+}

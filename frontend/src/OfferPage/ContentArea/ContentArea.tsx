@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ContentArea.css';
-import ImageSlider from './FullInformationBoard/ImageRotor/ImageRotor';
-import InformationField from './FullInformationBoard/InformationField/InformationField';
+import ImageSlider from '../../support/ImageRotor/ImageRotor';
+import InformationField from '../../support/InformationField/InformationField';
 import FullInformationBoard from './FullInformationBoard/FullInformationBoard';
 import PersonalInfoBoard from './PersonalInfoBoard/PersonalInfoBoard';
 

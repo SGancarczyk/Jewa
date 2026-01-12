@@ -1,0 +1,71 @@
+/* ======== UPPER BAR — GÓRA STRONY ======== */
+.four-pane-container {
+    width: 100%;
+    height: 58.3vh;
+    display: flex;
+    background: #f8f8f8;
+}
+
+/* LEWA CZĘŚĆ: 75% szerokości */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 75%;
+}
+
+/* Podobszar 1 */
+.pane-1 {
+  background-color: #ffffff;
+  height: 15%; /* wysokość 1 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 2rem;
+  border: 2px solid #333;
+}
+
+/* Podobszary 2 i 3 */
+.pane-2-3 {
+  
+  flex: 1; 
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  max-height: 85%;
+}
+
+/* PRAWA CZĘŚĆ: 25% szerokości */
+.right-section {
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pane-4 {
+  background-color: #ffffff;
+  flex: 1; /* wypełnia całą wysokość right-section */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #333;
+}
+
+.edit-offer-button {
+    background-color: #2814db;
+    border: 2px solid #1a1883;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}

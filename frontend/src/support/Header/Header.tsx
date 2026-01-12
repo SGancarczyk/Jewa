@@ -2,11 +2,18 @@ import { useEffect, useState } from 'react';
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 export const Header = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const handleLogout = () => {
+        setUserData(null);
+        localStorage.removeItem("jwtToken");
+        navigate("/");
+     };
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -45,14 +52,7 @@ export const Header = () => {
                 <button className="nav-button">
                     {userData}
                 </button>
-
-                <button className="nav-button" onClick={() => {
-                    localStorage.removeItem("jwtToken");
-                    setUserData(null);
-                    navigate("/");
-                }}>
-                    Wyloguj
-                </button>
+                <DropdownMenu onLogout={handleLogout} />
             </>
         } else {
             return <>
@@ -63,6 +63,7 @@ export const Header = () => {
                 <button className="nav-button" onClick={() => navigate("/register")}>
                     zarejestruj się
                 </button>
+                
             </>
         }
     }

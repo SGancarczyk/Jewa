@@ -1,0 +1,27 @@
+.opinion-wrapper {
+     display: flex;
+     flex-direction: column;
+     background-color: #ffffff;
+ }
+
+.opinions-header {
+     font-size: 24px;
+     font-weight: bold;
+     height: 50px;
+     flex : 1;
+     background-color: white;
+ }
+ 
+.opinion-box {
+     border: 1px solid #ccc;    
+     padding: 16px;
+     background-color: #f9f9f9;
+ }
+ 
+ .opinion-author {
+     font-weight: bold;
+ }
+ 
+ .opinion-text {
+     margin-top: 5px;
+ }

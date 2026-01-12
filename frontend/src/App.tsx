@@ -8,6 +8,11 @@ import ContactPage from './SupportPages/ContactPage/ContactPage';
 import ClientServicePage from './SupportPages/ClientServicePage/ClientServicePage';
 import OfferPage from './OfferPage/OfferPage';
 import OfferCreatorPage from './OfferCreator/offerCreator';
+import UserPage from './UserPage/UserPage';
+import EditProfilePage from './EditProfilePage/EditProfilePage';
+import UserOfferPage from './UserOfferPage/UserOfferPage';
+import EditOfferPage from './EditOfferPage/EditOfferPage';
+
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -234,6 +239,10 @@ function App() {
                 <Route element={<ProtectedRoute />}>
                     <Route path="/offerCreator" element={<OfferCreatorPage />} />
                 </Route>
+                <Route path="/user" element={<UserPage />} />
+                <Route path="/user/edit" element={<EditProfilePage />} />
+                <Route path="/userOffer/:id" element={<UserOfferPage />} />
+                <Route path="/userOffer/edit/:id" element={<EditOfferPage />} />
                 
             </Routes>
         </BrowserRouter>

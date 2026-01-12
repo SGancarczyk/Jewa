@@ -53,6 +53,7 @@ function ContentArea({ offers, page, onPage, endFlag }: ContentAreaProps) {
                         title={offer.title}
                         price={offer.price}
                         images={offer.images}
+                        jumpLink="offer"
                     />
                 ))}
             </div>
