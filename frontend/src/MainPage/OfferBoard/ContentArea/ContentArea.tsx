@@ -53,6 +53,8 @@ function ContentArea({ offers, page, onPage, endFlag }: ContentAreaProps) {
                         title={`${offer.model.make.name} ${offer.model.name}`}
                         price={offer.pricePerDay}
                         images={offer.images}
+                        productionYear={offer.productionYear}
+                        city={offer.city}
                     />
                 ))}
             </div>

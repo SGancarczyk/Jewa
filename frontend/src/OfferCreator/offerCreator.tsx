@@ -167,6 +167,7 @@ function OfferCreatorPage() {
             </div>
 
             <div className="creator-container">
+                <h1 className='hero-title'>Podaj <strong>dane</strong> techniczne pojazdu</h1>
                 <DataSelsector onUploadCriteria={setUploadData}/>
             </div>
 

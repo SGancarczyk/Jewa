@@ -100,50 +100,47 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
 
 
     return (
-        <>
-            <h1 className='hero-title'>Podaj <strong>dane</strong> techniczne pojazdu</h1>
-            <div className='search-grid-container'>
-                <TypeSelector selected={vehicleType} onSelect={setVehicleType}/>
+        <div className='search-grid-container'>
+            <TypeSelector selected={vehicleType} onSelect={setVehicleType}/>
 
-                <div style={{ gridColumn: "1/3", gridRow: "2"}}>
-                    <AutocompleteSelector
-                        label="Marka pojazdu"
-                        options={brandOptions}
-                        value={brand}
-                        onChange={(newVal) => setBrand(newVal)}
-                    />
-                </div>
-
-                <div style={{ gridColumn: "3/5", gridRow: "2"}}>
-                    <AutocompleteMakeSelector
-                        label="Model pojazdu"
-                        options={modelOptions}
-                        value={model}
-                        onChange={(newVal) => setModel(newVal)}
-                    />
-                </div>
-
-                <div style={{ gridColumn: "1/3", gridRow: "3"}}>
-                    <AutocompleteSelector
-                        label="Rok produkcji"
-                        options={mockDatabaseYears}
-                        value={year}
-                        onChange={(newVal) => setYear(newVal)}
-                        placeholder='Od...'
-                    />
-                </div>
-
-                <div style={{ gridColumn: "3/5", gridRow: "3"}}>
-                    <AutocompleteSelector
-                        label="(Paliwo)"
-                        options={[]}
-                        value={null}
-                        onChange={() => {}}
-                        placeholder='Wybierz'
-                    />
-                </div>
+            <div style={{ gridColumn: "1/3", gridRow: "2"}}>
+                <AutocompleteSelector
+                    label="Marka pojazdu"
+                    options={brandOptions}
+                    value={brand}
+                    onChange={(newVal) => setBrand(newVal)}
+                />
             </div>
-        </>
+
+            <div style={{ gridColumn: "3/5", gridRow: "2"}}>
+                <AutocompleteMakeSelector
+                    label="Model pojazdu"
+                    options={modelOptions}
+                    value={model}
+                    onChange={(newVal) => setModel(newVal)}
+                />
+            </div>
+
+            <div style={{ gridColumn: "1/3", gridRow: "3"}}>
+                <AutocompleteSelector
+                    label="Rok produkcji"
+                    options={mockDatabaseYears}
+                    value={year}
+                    onChange={(newVal) => setYear(newVal)}
+                    placeholder='Od...'
+                />
+            </div>
+
+            <div style={{ gridColumn: "3/5", gridRow: "3"}}>
+                <AutocompleteSelector
+                    label="(Paliwo)"
+                    options={[]}
+                    value={null}
+                    onChange={() => {}}
+                    placeholder='Wybierz'
+                />
+            </div>
+        </div>
     );
 };
 

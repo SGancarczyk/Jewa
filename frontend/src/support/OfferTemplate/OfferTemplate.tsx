@@ -10,10 +10,11 @@ interface OfferTemplateProps {
     title: string;
     price: string;
     images: any[];
-
+    productionYear: number;
+    city: string;
 }
 
-function OfferTemplate({ id, title, price, images }: OfferTemplateProps) {
+function OfferTemplate({ id, title, price, images, productionYear, city }: OfferTemplateProps) {
     const importImage = (imagePath: any) => {
         return <img src={`http://localhost:8080/api/offers/images/${imagePath.fileName}`} alt={title} className="offer-image" />
     }
@@ -28,7 +29,7 @@ function OfferTemplate({ id, title, price, images }: OfferTemplateProps) {
             <div className="offer-info">
                 <span className="offer-title">{title}</span>
                 <div>
-                    <dt>2020</dt>
+                    <>{productionYear}</>
                 </div>
                 <h1 className="offer-price">{price} <small>zł/dzień</small></h1>
             </div>
