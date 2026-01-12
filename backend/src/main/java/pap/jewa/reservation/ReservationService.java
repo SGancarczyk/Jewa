@@ -209,5 +209,20 @@ public class ReservationService {
 
         return reservationRepository.findAll(spec);
     }
+
+    public List<PendingReservation> getUsersRequestedReservations(Authentication authentication)
+            throws ResponseStatusException {
+
+        User currentUser = (User) authentication.getPrincipal();
+        if (currentUser == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
+        }
+
+        Specification<PendingReservation> spec = Specification.allOf(
+                PendingReservationSpecifications.hasUser(currentUser)
+        );
+
+        return pendingReservationRepository.findAll(spec);
+    }
 }
 

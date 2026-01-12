@@ -81,4 +81,12 @@ public class ReservationApi {
         var reservations = reservationService.getUsersReservations(authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservations);
     }
+
+    @PostMapping("/get_requested")
+    public ResponseEntity<List<PendingReservation>> getUsersRequestedReservation(
+            Authentication authentication
+    ) {
+        var reservations = reservationService.getUsersRequestedReservations(authentication);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservations);
+    }
 }
