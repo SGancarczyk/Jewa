@@ -1,0 +1,48 @@
+.menu-container {
+  position: relative;
+  width: 80px;
+}
+
+.circle-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.circle-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.circle-button.open {
+  transform: rotate(45deg);
+}
+
+.options {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.options button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #333;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.options button:hover {
+  background: #555;
+}

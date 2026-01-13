@@ -1,0 +1,45 @@
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.dropdown-select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.dropdown-description {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  white-space: pre-wrap; /* zachowuje nowe linie w opisie */
+  min-height: 200px; /* minimalna wysokość okna */
+  max-height: 250px; /* maksymalna wysokość, jeśli opis jest długi */
+  overflow-y: auto; /* dodaje scroll, jeśli tekst się nie mieści */
+}
+
+.instruction-section {
+  margin-top: 8px;
+}
+
+.instruction-title {
+  margin: 0 0 4px 0;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.instruction-link {
+  font-size: 14px;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.instruction-link:hover {
+  text-decoration: underline;
+}

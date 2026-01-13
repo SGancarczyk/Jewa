@@ -1,0 +1,49 @@
+.content-area {
+    height: 70vh;               /* maksymalna wysokość */
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow-y: auto;           /* dodaje scroll w pionie */
+}
+
+.content-area h1{
+    margin: 10px 0;
+    margin-left: 10px;
+    font-size: 70px;
+}
+.content-area h2{
+    margin: 8px 0;
+    margin-left: 20px;
+    font-size: 35px;
+}
+.content-area p,
+.content-area a{
+    margin: 4px 0;
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+.mail-button {
+  align-self: flex-start;
+  padding: 12px 24px;
+  background-color: #007bff; /* niebieski */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 30px;
+}
+
+.mail-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mail-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

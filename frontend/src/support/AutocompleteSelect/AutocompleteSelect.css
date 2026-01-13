@@ -1,0 +1,95 @@
+.car-selector-root .MuiOutlinedInput-root {
+	border-radius: 12px !important;
+	background-color: #FFFFFF !important;
+	font-family: 'Inter', sans-serif !important;
+
+	padding: 20px 14px !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+.car-selector-root .MuiAutocomplete-input {
+	color: #000000 !important;
+	-webkit-text-fill-color: #000000 !important;
+
+	font-weight: 500 !important;
+	padding: 0 !important;
+	height: 100% !important;
+}
+
+.car-selector-root .MuiInputLabel-root {
+	color: #888888 !important;
+	top: 1px !important;
+}
+
+.car-selector-root .MuiInputLabel-root.Mui-focused {
+	color: #000000 !important;
+	top: 0px !important;
+}
+
+.car-selector-root .MuiOutlinedInput-notchedOutline {
+	border-color: #E0E0E0 !important;
+	border-width: 1px !important;
+}
+
+.car-selector-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+	border-color: #B0B0B0 !important;
+}
+
+.car-selector-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+	border-color: #000000 !important;
+	border-width: 1px !important;
+}
+
+.car-selector-dropdown {
+	border-radius: 12px !important;
+	margin-top: 8px !important;
+	box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1) !important;
+	background-color: #FFFFFF !important;
+
+	overflow: hidden !important;
+	max-height: none !important;
+}
+
+.car-selector-dropdown .MuiAutocomplete-listbox {
+	max-height: 250px !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+
+	padding: 0 !important;
+	font-family: 'Inter', sans-serif !important;
+}
+
+.car-selector-dropdown .MuiAutocomplete-option {
+	font-family: 'Inter', sans-serif !important;
+	padding: 12px 16px !important;
+	color: #000000;
+	border-bottom: 1px solid #f0f0f0;
+	z-index: 10 !important;
+}
+
+.car-selector-dropdown .MuiAutocomplete-option:hover,
+.car-selector-dropdown .MuiAutocomplete-option.Mui-focused {
+	background-color: #F5F5F5 !important;
+}
+
+.car-selector-dropdown .MuiAutocomplete-option[aria-selected="true"] {
+	background-color: #E0E0E0 !important;
+}
+
+.car-selector-dropdown .MuiAutocomplete-listbox::-webkit-scrollbar {
+	width: 8px;
+}
+
+.car-selector-dropdown .MuiAutocomplete-listbox::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.car-selector-dropdown .MuiAutocomplete-listbox::-webkit-scrollbar-thumb {
+	background-color: #1C1B1F;
+	border-radius: 4px;
+}
+
+.car-selector-dropdown .MuiAutocomplete-listbox::-webkit-scrollbar-thumb:hover {
+	background-color: #000000;
+}

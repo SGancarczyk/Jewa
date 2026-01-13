@@ -1,11 +1,18 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, Navigate, Outlet } from 'react-router-dom';
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
 import MainPage from './MainPage/MainPage';
-import InformationPage from './InformationPage/InformationPage';
-import HelpPage from './HelpPage/HelpPage';
-import ContactPage from './ContactPage/ContactPage';
-import ClientServicePage from './ClientServicePage/ClientServicePage';
+import InformationPage from './SupportPages/InformationPage/InformationPage';
+import HelpPage from './SupportPages/HelpPage/HelpPage';
+import ContactPage from './SupportPages/ContactPage/ContactPage';
+import ClientServicePage from './SupportPages/ClientServicePage/ClientServicePage';
+import OfferPage from './OfferPage/OfferPage';
+import OfferCreatorPage from './OfferCreator/offerCreator';
+import UserPage from './UserPage/UserPage';
+import EditProfilePage from './EditProfilePage/EditProfilePage';
+import UserOfferPage from './UserOfferPage/UserOfferPage';
+import EditOfferPage from './EditOfferPage/EditOfferPage';
+
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -211,6 +218,11 @@ function Dashboard() {
     );
 }
 
+const ProtectedRoute = () => {
+    const token = localStorage.getItem("jwtToken");
+    return token ? <Outlet /> : <Navigate to="/login" />;
+}
+
 function App() {
     return (
         <BrowserRouter>
@@ -223,6 +235,15 @@ function App() {
                 <Route path="/help" element={<HelpPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/clientservice" element={<ClientServicePage />} />
+                <Route path="/offer/:id" element={<OfferPage />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/offerCreator" element={<OfferCreatorPage />} />
+                </Route>
+                <Route path="/user" element={<UserPage />} />
+                <Route path="/user/edit" element={<EditProfilePage />} />
+                <Route path="/userOffer/:id" element={<UserOfferPage />} />
+                <Route path="/userOffer/edit/:id" element={<EditOfferPage />} />
+                
             </Routes>
         </BrowserRouter>
     );

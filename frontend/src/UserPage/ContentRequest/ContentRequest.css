@@ -1,0 +1,39 @@
+.split-panel-white {
+  width: 100%;
+  min-height: 58.3vh;
+  display: flex;
+  background: #ffffff;
+}
+
+/* POŁÓWKI */
+.panel-side {
+  flex: 1;
+  padding: 2rem;
+}
+
+
+/* TYTUŁ */
+.panel-title {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+/* POJEDYNCZY WIERSZ */
+.panel-row-white {
+  display: flex;
+  align-items: center;
+
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  margin-bottom: 1rem;
+  background: #fff;
+}
+
+/* INFORMACJE */
+.row-info-white {
+  width: 50%;
+  font-size: 0.95rem;
+}
+

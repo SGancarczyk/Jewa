@@ -1,0 +1,26 @@
+.content-area-offer-page {
+    height: 70vh;
+    display: flex;
+    /*padding: 1.5vw;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.offer-page-background-image {
+  position: fixed;
+  width: 100vw;
+  height: 70vh;
+  background-image: url(../assetes/background_image3.png);
+  background-size: cover;
+  background-position: center -70px;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.full-information-wrapper {
+    padding: 1.5vw;
+}
+
+.personal-information-wrapper {
+    padding: 1.5vw;
+}

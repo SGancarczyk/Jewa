@@ -1,0 +1,14 @@
+.date-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-select select {
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.label {
+  font-weight: bold;
+}
