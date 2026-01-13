@@ -1,4 +1,3 @@
-```markdown
 # Reservation API Documentation
 
 ## Base URL
@@ -9,7 +8,7 @@
 
 ## Endpoints
 
-### 1. Request a Pending Reservation
+### Request a Pending Reservation
 
 **POST** `/request`
 
@@ -32,14 +31,9 @@
 ```json
 {
   "id": 10,
-  "user": null,
-  "offer": {
-    "id": 1,
-    "title": "Sample Offer"
-  },
+  "offerId": 1,
   "startDate": "2026-01-10",
   "endDate": "2026-01-12",
-  "cardToken": null,
   "cardLast4Digits": "1234"
 }
 ```
@@ -52,7 +46,33 @@
 
 ---
 
-### 2. Accept a Pending Reservation
+### Get Users Requested Reservations
+
+**POST** `/get_requested`
+
+**Description:** Retrieve all pending reservations created by the logged-in user.
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "id": 10,
+    "user": null,
+    "offer": {
+      ...
+    },
+    "startDate": "2026-01-10",
+    "endDate": "2026-01-12",
+    "cardLast4Digits": "1234"
+  },
+  ...
+]
+```
+
+---
+
+### Accept a Pending Reservation
 
 **POST** `/accept/{pendingReservationId}`
 
@@ -70,15 +90,14 @@
 {
   "id": 5,
   "user": {
-    "id": 2,
-    "username": "johndoe"
+    ...
   },
   "offer": {
-    "id": 1,
-    "title": "Sample Offer"
+    ...
   },
   "startDate": "2026-01-10",
-  "endDate": "2026-01-12"
+  "endDate": "2026-01-12",
+  "cardLast4Digits": "1234"
 }
 ```
 
@@ -91,7 +110,7 @@
 
 ---
 
-### 3. Decline a Pending Reservation
+### Decline a Pending Reservation
 
 **POST** `/decline/{pendingReservationId}`
 
@@ -117,7 +136,7 @@
 
 ---
 
-### 4. Get Pending Reservations
+### Get Pending Reservations
 
 **POST** `/get_pending/{offerId}`
 
@@ -137,8 +156,7 @@
     "id": 10,
     "user": null,
     "offer": {
-      "id": 1,
-      "title": "Sample Offer"
+      ...
     },
     "startDate": "2026-01-10",
     "endDate": "2026-01-12",
@@ -156,7 +174,32 @@
 
 ---
 
-### 5. Get Confirmed Reservations
+### Get Users Pending Reservations
+
+**POST** `/get_pending`
+
+**Description:** Retrieve all pending reservations concerning offers owned by the logged-in user.
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "id": 10,
+    "user": null,
+    "offer": {
+      ...
+    },
+    "startDate": "2026-01-10",
+    "endDate": "2026-01-12",
+    "cardLast4Digits": "1234"
+  }
+]
+```
+
+---
+
+### Get Confirmed Reservations
 
 **POST** `/get_reservations/{offerId}`
 
@@ -175,16 +218,15 @@
   {
     "id": 5,
     "user": {
-      "id": 2,
-      "username": "johndoe"
+      ...
     },
     "offer": {
-      "id": 1,
-      "title": "Sample Offer"
+      ...
     },
     "startDate": "2026-01-10",
     "endDate": "2026-01-12"
-  }
+  },
+  ...
 ]
 ```
 
@@ -194,4 +236,35 @@
 - `404 Not Found` – Offer not found  
 
 ---
+
+### Get Users Confirmed Reservations
+
+**POST** `/get_reservations`
+
+**Description:** Retrieve all confirmed reservations belonging to the logged-in user.  
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "id": 5,
+    "user": {
+      ...
+    },
+    "offer": {
+      ...
+    },
+    "startDate": "2026-01-10",
+    "endDate": "2026-01-12"
+  },
+  ...
+]
 ```
+
+**Possible Errors:**
+
+- `400 Bad Request` – Missing offerId  
+- `404 Not Found` – Offer not found  
+
+---
