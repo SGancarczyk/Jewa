@@ -3,7 +3,7 @@
     display: flex;
     /*padding: 1.5vw;*/
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 .offer-page-background-image {

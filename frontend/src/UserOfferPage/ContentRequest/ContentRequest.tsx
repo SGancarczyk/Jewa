@@ -70,7 +70,9 @@ function SplitManagementPanel({ offerId }: Props) {
         } finally {
             setIsLoadingAccepted(false);
         }
-        };
+    };
+
+    
 
     useEffect(() => {
         

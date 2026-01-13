@@ -1,52 +1,86 @@
-import { TextField } from "@mui/material";
+import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 import Box from '@mui/material/Box';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./TextField.css"
 
-interface CustomTextFieldProps {
-    minLength?: number;
-    maxLength?: number;
-    style?: React.CSSProperties;
-    label: string;
-    placeholder?: string
-    onChange?: (newValue: string) => void;
+interface TextFieldConfig {
+	label: string;
+	placeholder: string;
+	minLength: number;
+	maxLength: number;
+	value: string;
+	onChange: (newValue: string) => void;
+	suffix: string;
 }
 
-function CustomTextField({ minLength = 16, maxLength = 70, style, label, placeholder, onChange = () => {} }: CustomTextFieldProps) {
-  const [title, setTitle] = useState('');
+export const useTextField = (
+	label: string,
+	placeholder: string,
+	minLength: number = 0,
+	maxLength: number = 100,
+	initialValue: string = "",
+	suffix: string = ""
+): TextFieldConfig => {
+	const [value, setValue] = useState(initialValue);
+	return {
+		label,
+		placeholder,
+		minLength,
+		maxLength,
+		value,
+		onChange: setValue,
+		suffix
+	}
+}
 
-  const isError = title.length > 0 && (title.length < minLength || title.length > maxLength);
+interface CustomTextFieldProps extends Omit<TextFieldProps, 'onChange'> {
+	fieldData: TextFieldConfig;
+}
 
-  const helperText = isError
-    ? title.length < minLength
-      ? `Brakuje ${minLength - title.length} znaków`
-      : `Przekroczono o ${title.length - maxLength} znaków`
-    : `${title.length}/${maxLength}`;
+function CustomTextField({
+	fieldData,
+	sx,
+	...props
+}: CustomTextFieldProps) {
+	const { value, label, placeholder, minLength, maxLength, onChange, suffix } = fieldData;
 
-  return (
-    <Box >
-      <TextField
-        className="custom-textfield"
-        fullWidth
-        label={label}
-        placeholder={placeholder}
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-          onChange(e.target.value);
-        }}
-        error={isError}
-        helperText={helperText}
-        style={style}
+	const currentLength = value.length;
+	const isError = currentLength > 0 && (currentLength < minLength || currentLength > maxLength);
 
-        sx={{
-          '& .MuiOutlinedInput-root': {
-            borderRadius: '12px',
-          },
-        }}
-      />
-    </Box>
-  );
+	const computedHelperText = isError
+		? currentLength < minLength
+			? `Brakuje ${minLength - currentLength} znaków`
+			: `Przekroczono o ${currentLength - maxLength} znaków`
+		: `${currentLength}/${maxLength}`;
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		onChange(event.target.value);
+	};
+
+	return (
+		<Box>
+			<TextField
+				className="custom-textfield"
+				fullWidth
+				label={label}
+				value={value}
+				onChange={handleChange}
+				error={isError}
+				helperText={computedHelperText}
+				placeholder={placeholder}
+				InputProps={{
+					endAdornment: suffix ? <InputAdornment position="end">{suffix}</InputAdornment> : null,
+				}}
+				sx={{
+					'& .MuiOutlinedInput-root': {
+						borderRadius: '12px',
+					},
+					...sx as any
+				}}
+				{...props}
+			/>
+		</Box>
+	);
 }
 
 export default CustomTextField;

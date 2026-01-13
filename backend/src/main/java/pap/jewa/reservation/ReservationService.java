@@ -169,6 +169,21 @@ public class ReservationService {
         return pendingReservationRepository.findAll(spec);
     }
 
+    public List<PendingReservation> getUsersPendingReservations(Authentication authentication)
+            throws ResponseStatusException {
+
+        User currentUser = (User) authentication.getPrincipal();
+        if (currentUser == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
+        }
+
+        Specification<PendingReservation> spec = Specification.allOf(
+                PendingReservationSpecifications.hasOwner(currentUser)
+        );
+
+        return pendingReservationRepository.findAll(spec);
+    }
+
     public List<Reservation> getReservations(Long offerId)
             throws ResponseStatusException {
 
@@ -178,6 +193,36 @@ public class ReservationService {
         );
 
         return reservationRepository.findAll(spec);
+    }
+
+    public List<Reservation> getUsersReservations(Authentication authentication)
+            throws ResponseStatusException {
+
+        User currentUser = (User) authentication.getPrincipal();
+        if (currentUser == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
+        }
+
+        Specification<Reservation> spec = Specification.allOf(
+                ReservationSpecifications.hasUser(currentUser)
+        );
+
+        return reservationRepository.findAll(spec);
+    }
+
+    public List<PendingReservation> getUsersRequestedReservations(Authentication authentication)
+            throws ResponseStatusException {
+
+        User currentUser = (User) authentication.getPrincipal();
+        if (currentUser == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
+        }
+
+        Specification<PendingReservation> spec = Specification.allOf(
+                PendingReservationSpecifications.hasUser(currentUser)
+        );
+
+        return pendingReservationRepository.findAll(spec);
     }
 }
 

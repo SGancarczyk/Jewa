@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Selector.css';
-import TypeSelector from './TypeSelector/TypeSelector';
+import TypeSelector from '../../support/TypeSelector/TypeSelector';
 import { AutocompleteSelector } from '../../support/AutocompleteSelect/AutocompleteSelect';
 
 export interface SearchCriteria {
@@ -160,7 +160,7 @@ export const Selsector = ({ onSearchCriteria }: SelectorProps) => {
 
                 <div style={{ gridColumn: "1/3", gridRow: "4"}}>
                     <button className='search-button'
-                    onClick={() => onSearchCriteria({ vehicleType: vehicleType, make: brand, model: model, year: null })}
+                    onClick={() => onSearchCriteria({ vehicleType: vehicleType, make: brand, model: model, year: year })}
                     >
                         Pokaż Ogłoszenia
                     </button>

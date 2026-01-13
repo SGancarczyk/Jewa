@@ -55,14 +55,38 @@ public class ReservationApi {
         return ResponseEntity.status(HttpStatus.CREATED).body(reservations);
     }
 
+    @PostMapping("/get_pending")
+    public ResponseEntity<List<PendingReservation>> getPendingReservation(
+            Authentication authentication
+    ) {
+        var reservations = reservationService.getUsersPendingReservations(authentication);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservations);
+    }
+
     @PostMapping("/get_reservations/{offerId}")
-    public ResponseEntity<List<Reservation>> getPendingReservation(
+    public ResponseEntity<List<Reservation>> getReservationByOfferId(
             @PathVariable Long offerId
     ) {
         if (offerId == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Offer Id must be specified");
         }
         var reservations = reservationService.getReservations(offerId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservations);
+    }
+
+    @PostMapping("/get_reservations")
+    public ResponseEntity<List<Reservation>> declineReservation(
+            Authentication authentication
+    ) {
+        var reservations = reservationService.getUsersReservations(authentication);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservations);
+    }
+
+    @PostMapping("/get_requested")
+    public ResponseEntity<List<PendingReservation>> getUsersRequestedReservation(
+            Authentication authentication
+    ) {
+        var reservations = reservationService.getUsersRequestedReservations(authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservations);
     }
 }

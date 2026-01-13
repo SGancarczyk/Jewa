@@ -29,13 +29,6 @@ function ContentAreaOffers({ offers, page, onPage, endFlag }: ContentAreaProps) 
         </button>
     }
 
-    const emptyOfferBoard = () => {
-        return <div className="brak-ofert-message">
-            Brak Ofert
-            <Icon name="emptyList" width={100} height={100} color="#000000ff" />
-        </div>
-    }
-
     return (
         <div className="aaacontent-area">
             <div style={{
@@ -48,9 +41,11 @@ function ContentAreaOffers({ offers, page, onPage, endFlag }: ContentAreaProps) 
                     <OfferTemplate
                         key={index}
                         id={offer.id}
-                        title={offer.title}
-                        price={offer.price}
+                        title={`${offer.model.make.name} ${offer.model.name}`}
+                        price={offer.pricePerDay}
                         images={offer.images}
+                        productionYear={offer.productionYear}
+                        city={offer.city}
                         jumpLink="userOffer"
                     />
                 ))}
@@ -66,7 +61,6 @@ function ContentAreaOffers({ offers, page, onPage, endFlag }: ContentAreaProps) 
                 )}
             </div>
 
-            {offers.length === 0 && emptyOfferBoard()}
             {!endFlag && showMoreOffers()}
         </div>
     );

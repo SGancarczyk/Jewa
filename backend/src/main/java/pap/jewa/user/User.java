@@ -1,5 +1,7 @@
 package pap.jewa.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties({"enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked"})
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -32,6 +35,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "first_name", nullable = false)
@@ -46,9 +50,11 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "auth_provider")
+    @JsonIgnore
     private AuthProvider authProvider;
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }

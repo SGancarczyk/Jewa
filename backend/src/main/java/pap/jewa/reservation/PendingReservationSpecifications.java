@@ -12,6 +12,13 @@ public class PendingReservationSpecifications {
                         : cb.equal(root.get("offer").get("owner"), owner);
     }
 
+    public static Specification<PendingReservation> hasUser(User user) {
+        return (root, query, cb) ->
+                user == null
+                        ? null
+                        : cb.equal(root.get("user"), user);
+    }
+
     public static Specification<PendingReservation> hasOfferId(Long offerId) {
         return (root, query, cb) ->
                 offerId == null

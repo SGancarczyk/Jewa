@@ -18,7 +18,7 @@ const InformationField = (props : InformationFieldProps) => {
   return (
     <div className="info-box">
       <div className="info-cell-name">Cena za dzień:</div>
-      <div className="info-cell-info">{props.price}</div>
+      <div className="info-cell-info">{props.price} zł</div>
       <div className="info-cell-name">Rodzaj paliwa: </div>
       <div className="info-cell-info">{props.fuelType}</div>
       <div className="info-cell-name">Marka: </div>

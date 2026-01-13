@@ -37,4 +37,11 @@ public class OfferSpecifications {
     public static Specification<Offer> hasId(Long id) {
         return (root, query, cb) -> (id == null) ? null : cb.equal(root.get("id"), id);
     }
+
+    public static Specification<Offer> hasOwnerId(Integer ownerID) {
+        return (root, query, cb) ->
+                ownerID == null
+                        ? null
+                        : cb.equal(root.get("owner").get("id"), ownerID);
+    }
 }

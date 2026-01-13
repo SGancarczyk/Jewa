@@ -3,13 +3,29 @@ import { use, useEffect, useState } from "react";
 import Header from "../support/Header/Header";
 import BottomBar from "../support/BottomBar/BottomBar";
 import './offerCreator.css';
-import CustomTextField from "../support/CustomTextField/TextField";
+import CustomTextField, { useTextField} from "../support/CustomTextField/TextField";
 import SelectedImagesDisplay from "./SelectedImagesDisplay/SelectedImagesDisplay";
 import { type ImageItem } from "./SelectedImagesDisplay/SelectedImagesDisplay";
+import { AutoGuard } from "../support/AutoGuard/AutoGuard";
+import DataSelsector from "./TechnicalDataSelector/TechnicalDataSelector";
+import { type UploadCriteria } from "./TechnicalDataSelector/TechnicalDataSelector";
+
 
 function OfferCreatorPage() {
+    const [uploadData, setUploadData] = useState<UploadCriteria>({});
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
-    const [offerTitle, setOfferTitle] = useState<string>("");
+
+    const titleFieldData = useTextField(
+        "Tytuł ogłoszenia", "Tu podaj ogłoszenie...", 10, 40, ""
+    )
+
+    const descFieldData = useTextField(
+        "Opis ogłoszenia", "Wpisz te informacje, które byłyby ważne dla ciebie, podczas przeglądania ogłoszenia", 40, 9000, ""
+    )
+
+    const priceFieldData = useTextField(
+        "Cena za dzień", "Ile jest warty ten gruz?", 1, 5, "", "zł"
+    )
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -51,15 +67,34 @@ function OfferCreatorPage() {
             return;
         }
 
+        if (titleFieldData.value.length < titleFieldData.minLength || titleFieldData.value.length > titleFieldData.maxLength) {
+            alert(`Tytuł oferty musi mieć od ${titleFieldData.minLength} do ${titleFieldData.maxLength} znaków.`);
+            return;
+        }
+
+        if (descFieldData.value.length < descFieldData.minLength || descFieldData.value.length > descFieldData.maxLength) {
+            alert(`Opis oferty musi mieć od ${descFieldData.minLength} do ${descFieldData.maxLength} znaków.`);
+            return;
+        }
+
+        if (!uploadData.modelId) {
+            alert("model pojazdu musi zostać wybrany!");
+            return
+        }
+
+        if (!uploadData.vehicleType) {
+            alert("Typ pojazdu musi zostać wybrany!")
+        }
+
         const payload = {
-            title: offerTitle,
-            description: "To jest opis testowy ze sztywnych danych + wybrane zdjęcie.",
-            pricePerDay: 150.00,
-            vehicleType: "CARS",
+            title: titleFieldData.value,
+            description: descFieldData.value,
+            pricePerDay: priceFieldData.value,
+            vehicleType: uploadData.vehicleType,
             productionYear: 2022,
             bodyType: "SUV",
             fuelType: "DIESEL",
-            model: { id: 1 },
+            model: { id: uploadData.modelId },
             images: [],
             city: "Warszawa",
             address: "ul. Marszałkowska 10",
@@ -105,23 +140,42 @@ function OfferCreatorPage() {
             <div className="creator-container">
                 <h1 className="hero-title">Tworzenie nowej <strong>oferty</strong></h1>
                 <CustomTextField
-                    label="Tytuł ogłoszenia"
-                    placeholder="Tu podaj tytuł..."
-                    style={{width: "60%"}}
-                    onChange={setOfferTitle}
-                    minLength={ 10 }
+                    style={{width: "70%"}}
+                    fieldData={titleFieldData}
                 />
             </div>
 
-            <div className="creator-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div className="creator-container">
                 <h1 className="hero-title">Dodaj <strong>obrazy</strong></h1>
                 <span>Pierwsze zdjęcie będzie zdjęciem głównym.</span>
                 <SelectedImagesDisplay selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
-
             </div>
-            <button className="submit-offer-button" onClick={handleAddOffer}>
-                Dodaj ofertę
-            </button>
+
+            <div className="creator-container">
+                <h1 className="hero-title">Dodaj <strong>opis</strong></h1>
+                <CustomTextField
+                    style={{width: "70%"}}
+                    fieldData={descFieldData}
+                    multiline
+                    rows={11}
+                />
+
+                <CustomTextField
+                    style={{width: "30%"}}
+                    fieldData={priceFieldData}
+                />
+            </div>
+
+            <div className="creator-container">
+                <h1 className='hero-title'>Podaj <strong>dane</strong> techniczne pojazdu</h1>
+                <DataSelsector onUploadCriteria={setUploadData}/>
+            </div>
+
+            <AutoGuard>
+                <button className="submit-offer-button" onClick={handleAddOffer}>
+                    Dodaj ogłoszenie
+                </button>
+            </AutoGuard>
 
             <BottomBar />
         </div>

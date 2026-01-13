@@ -2,7 +2,7 @@
 .bbottom-bar {
     position: relative;
     margin-top: auto;
-    height: 15vh;
+    min-height: 15vh;
     background-color: black;
 }
 

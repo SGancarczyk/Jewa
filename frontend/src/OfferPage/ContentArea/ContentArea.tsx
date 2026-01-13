@@ -3,7 +3,7 @@ import './ContentArea.css';
 import ImageSlider from '../../support/ImageRotor/ImageRotor';
 import InformationField from '../../support/InformationField/InformationField';
 import FullInformationBoard from './FullInformationBoard/FullInformationBoard';
-import PersonalInfoBoard from './PersonalInfoBoard/PersonalInfoBoard';
+import PersonalInfoBoard from '../../support/PersonalInfoBoard/PersonalInfoBoard';
 
 interface OfferImage {
     id: number;
