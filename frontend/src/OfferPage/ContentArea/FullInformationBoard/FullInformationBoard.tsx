@@ -6,6 +6,7 @@ import PaymentForm from "./PaymentComponent/PaymentForm";
 import { Icon } from '../../../Icons/Icon';
 import { useEffect, useState } from "react";
 import { validateDateRange } from "./dateValidator";
+import { useNavigate } from "react-router-dom";
 interface OfferImage {
     id: number;
     fileName: string;
@@ -60,6 +61,7 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
     });
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -140,6 +142,11 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
 
         const token = localStorage.getItem("jwtToken");
 
+        if (!token){
+            alert(`Błąd w tworzeniu rezerwacji.(Wymagane logowanie)`);
+            return;
+        }
+
         try {
             const response = await fetch("http://localhost:8080/api/reservation/request", {
                 method: "POST",
@@ -151,10 +158,13 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
             });
 
             if (!response.ok) {
+                alert(`Błąd w tworzeniu rezerwacji.(Termin zajęty/Nie rezerwować własnego pojazdu)`);
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
             console.log("Reservation created:", data);
+            alert(`Wyłanono rezerwację na ${daysRent(startDate, endDate)} dni. \nŁączna kwota: ${daysRent(startDate, endDate) * offer.pricePerDay} PLN.`);
+            navigate(`/`);
         } catch (error) {
             console.error("Error creating reservation:", error);
         }

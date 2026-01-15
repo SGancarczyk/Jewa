@@ -3,14 +3,20 @@
   min-height: 58.3vh;
   display: flex;
   background: #ffffff;
+  border: 2px solid #ccc;
 }
 
 /* POŁÓWKI */
-.panel-side {
+.panel-side-white  {
   flex: 1;
   padding: 2rem;
 }
 
+/* LINIA POŚRODKU */
+.panel-divider {
+  width: 2px;
+  background-color: #ccc;
+}
 
 /* TYTUŁ */
 .panel-title {
@@ -22,6 +28,8 @@
 .panel-row-white {
   display: flex;
   align-items: center;
+  justify-content: left;
+  gap: 1rem;
 
   padding: 1rem;
   border: 1px solid #ddd;
@@ -31,9 +39,54 @@
   background: #fff;
 }
 
+.panel-row-accepted {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #0e9235;
+  background: #2ecc71;
+}
+
 /* INFORMACJE */
 .row-info-white {
-  width: 50%;
+  flex: 1;
   font-size: 0.95rem;
 }
 
+/* AKCJE */
+.row-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* GUZIKI */
+.btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.btn.accept {
+  background-color: #2ecc71;
+}
+
+.btn.reject {
+  background-color: #e74c3c;
+}
+
+.btn.info {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  color : black;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
