@@ -14,6 +14,7 @@ import { type UploadCriteria } from "./TechnicalDataSelector/TechnicalDataSelect
 function OfferCreatorPage() {
     const [uploadData, setUploadData] = useState<UploadCriteria>({});
     const [selectedImages, setSelectedImages] = useState<ImageItem[]>([]);
+    const navigate = useNavigate();
 
     const titleFieldData = useTextField(
         "Tytuł ogłoszenia", "Tu podaj ogłoszenie...", 10, 40, ""
@@ -122,6 +123,7 @@ function OfferCreatorPage() {
 
                 alert("Udało się! Oferta i zdjęcie dodane.");
                 setSelectedImages([]);
+                navigate(`/`);
             } else {
                 const errorText = await response.text();
                 console.error("BŁĄD SERWERA:", response.status, errorText);
