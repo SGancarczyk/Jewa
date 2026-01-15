@@ -208,7 +208,7 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
                     <p>{offer.description}</p>
                 </div>
                 <button className="buy-button" onClick={() => paymentAction()}>
-                    Kup Teraz
+                    Przejdź Dalej
                 </button>
                 {showModal && (
                     <div className="modal-overlay" onClick={() => {
@@ -236,6 +236,7 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
                                     disabled={!!error}
                                     onClick={() => {
                                             createReservation();
+                                            alert(`Wyłanono rezerwację na ${daysRent(startDate, endDate)} dni. \nŁączna kwota: ${daysRent(startDate, endDate) * offer.pricePerDay} PLN.`);
                                             setShowModal(false);
                                         }}
                                         > Tak </button>

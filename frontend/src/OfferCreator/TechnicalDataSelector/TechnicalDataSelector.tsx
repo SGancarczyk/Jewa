@@ -7,6 +7,7 @@ export interface UploadCriteria {
     modelId?: number | null;
     year?: string | null;
     vehicleType?: string | null;
+    fuelType?: string | null;
 }
 
 interface MakeDTO {
@@ -26,14 +27,14 @@ interface SelectorProps {
 
 
 const mockDatabaseYears: string[] = ["2025", "2024", "2023", "2022", "2020", "2015", "2010"];
-const mockDatabasePrices: string[] = ["10000", "50000", "100000", "200000", "500000"];
+const mockDatabaseFuel: string[] = ["Benzyna", "Dizel", "LPG", "Hybryda", "Paliwo rakietowe"]
 
 export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
     const [vehicleType, setVehicleType] = useState("");
     const [brand, setBrand] = useState<string | null>(null);
     const [model, setModel] = useState<number | null>(null);
     const [year, setYear] = useState<string | null>(null);
-    const [price, setprice] = useState<string | null>(null);
+    const [fuelType, setfuelType] = useState<string | null>(null);
 
     const [brandOptions, setBrandOptions] = useState<string[]>([]);
     const [modelOptions, setModelOptions] = useState<ModelDTO[]>([]);
@@ -94,9 +95,13 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
     }, [brand]);
 
     useEffect(() => {
-        onUploadCriteria({'modelId': model, 'vehicleType': vehicleType});
-        console.log(model)
-    }, [model, vehicleType])
+        onUploadCriteria({
+            'modelId': model,
+            'vehicleType': vehicleType,
+            'year': year,
+            'fuelType': fuelType
+        });
+    }, [model, vehicleType, year, fuelType])
 
 
     return (
@@ -108,7 +113,7 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
                     label="Marka pojazdu"
                     options={brandOptions}
                     value={brand}
-                    onChange={(newVal) => setBrand(newVal)}
+                    onChange={newVal => setBrand(newVal)}
                 />
             </div>
 
@@ -117,7 +122,7 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
                     label="Model pojazdu"
                     options={modelOptions}
                     value={model}
-                    onChange={(newVal) => setModel(newVal)}
+                    onChange={newVal => setModel(newVal)}
                 />
             </div>
 
@@ -126,18 +131,18 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
                     label="Rok produkcji"
                     options={mockDatabaseYears}
                     value={year}
-                    onChange={(newVal) => setYear(newVal)}
+                    onChange={newVal => setYear(newVal)}
                     placeholder='Od...'
                 />
             </div>
 
             <div style={{ gridColumn: "3/5", gridRow: "3"}}>
                 <AutocompleteSelector
-                    label="(Paliwo)"
-                    options={[]}
-                    value={null}
-                    onChange={() => {}}
-                    placeholder='Wybierz'
+                    label="Paliwo"
+                    options={mockDatabaseFuel}
+                    value={fuelType}
+                    onChange={newVal => setfuelType(newVal)}
+                    placeholder='Jakie paliwo...'
                 />
             </div>
         </div>

@@ -28,6 +28,14 @@ function OfferCreatorPage() {
         "Cena za dzień", "Ile jest warty ten gruz?", 1, 5, "", "zł"
     )
 
+    const cityField = useTextField(
+        "Miasto", "W jakim mieście znajduje się pojazd?", 2, 30, ""
+    )
+
+    const addressField = useTextField(
+        "Adres", "ulica | numer domu", 2, 30, ""
+    )
+
     useEffect(() => {
         window.scrollTo(0, 0);
         return () => {
@@ -78,13 +86,23 @@ function OfferCreatorPage() {
             return;
         }
 
+        if (cityField.value.length < cityField.minLength || cityField.value.length > cityField.maxLength) {
+            alert("Podaj poprawne miasto!");
+            return;
+        }
+
+        if (addressField.value.length < addressField.minLength || addressField.value.length > addressField.maxLength) {
+            alert("Podaj poprawny adres!");
+            return;
+        }
+
         if (!uploadData.modelId) {
             alert("model pojazdu musi zostać wybrany!");
             return
         }
 
         if (!uploadData.vehicleType) {
-            alert("Typ pojazdu musi zostać wybrany!")
+            alert("Typ pojazdu musi zostać wybrany!");
         }
 
         const payload = {
@@ -92,14 +110,15 @@ function OfferCreatorPage() {
             description: descFieldData.value,
             pricePerDay: priceFieldData.value,
             vehicleType: uploadData.vehicleType,
-            productionYear: 2022,
+            productionYear: Number(uploadData.year),
             bodyType: "SUV",
-            fuelType: "DIESEL",
+            fuelType: uploadData.fuelType,
             model: { id: uploadData.modelId },
             images: [],
-            city: "Warszawa",
-            address: "ul. Marszałkowska 10",
+            city: cityField.value,
+            address: addressField.value,
         };
+
 
         try {
             console.log("Tworzę ofertę...", payload);
@@ -171,6 +190,18 @@ function OfferCreatorPage() {
             <div className="creator-container">
                 <h1 className='hero-title'>Podaj <strong>dane</strong> techniczne pojazdu</h1>
                 <DataSelsector onUploadCriteria={setUploadData}/>
+            </div>
+
+            <div className="creator-container">
+                <h1 className='hero-title'><strong>Adres</strong> właściciela</h1>
+                <CustomTextField
+                    style={{width: "60%"}}
+                    fieldData={cityField}
+                />
+                <CustomTextField
+                    style={{width: "60%"}}
+                    fieldData={addressField}
+                />
             </div>
 
             <AutoGuard>

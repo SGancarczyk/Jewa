@@ -63,7 +63,7 @@ export const Header = () => {
                 <button className="nav-button" onClick={() => navigate("/register")}>
                     zarejestruj się
                 </button>
-                
+
             </>
         }
     }

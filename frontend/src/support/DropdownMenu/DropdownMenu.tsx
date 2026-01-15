@@ -22,10 +22,10 @@ function DropdownMenu({ onLogout }: DropdownMenuProps) {
 
             {open && (
                 <div className="options">
-                <button onClick={() => 
+                <button onClick={() =>
                     navigate("/user")
                 }>Moje Konto</button>
-                <button onClick={() => 
+                <button onClick={() =>
                     navigate("/user/edit")
                 }>Edytuj Konto</button>
                 <button onClick={() => {
