@@ -7,6 +7,7 @@ export interface UploadCriteria {
     modelId?: number | null;
     year?: string | null;
     vehicleType?: string | null;
+    fuelType?: string | null;
 }
 
 interface MakeDTO {
@@ -33,6 +34,7 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
     const [brand, setBrand] = useState<string | null>(null);
     const [model, setModel] = useState<number | null>(null);
     const [year, setYear] = useState<string | null>(null);
+    const [fuelType, setFuelType] = useState<string | null>(null);
     const [price, setprice] = useState<string | null>(null);
 
     const [brandOptions, setBrandOptions] = useState<string[]>([]);
@@ -94,9 +96,14 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
     }, [brand]);
 
     useEffect(() => {
-        onUploadCriteria({'modelId': model, 'vehicleType': vehicleType});
+        onUploadCriteria({
+            'modelId': model,
+            'year': year,
+            'vehicleType': vehicleType,
+            "fuelType": fuelType
+        });
         console.log(model)
-    }, [model, vehicleType])
+    }, [model, year, vehicleType, fuelType])
 
 
     return (
@@ -127,16 +134,16 @@ export const DataSelsector = ({ onUploadCriteria }: SelectorProps) => {
                     options={mockDatabaseYears}
                     value={year}
                     onChange={(newVal) => setYear(newVal)}
-                    placeholder='Od...'
+                    placeholder='Podaj rok...'
                 />
             </div>
 
             <div style={{ gridColumn: "3/5", gridRow: "3"}}>
                 <AutocompleteSelector
-                    label="(Paliwo)"
-                    options={[]}
-                    value={null}
-                    onChange={() => {}}
+                    label="Paliwo"
+                    options={["Bęzyna", "Dizel", "Hybryda", "LPG", "Paliwo rakietowae"]}
+                    value={fuelType}
+                    onChange={(newVal) => setFuelType(newVal)}
                     placeholder='Wybierz'
                 />
             </div>

@@ -86,14 +86,20 @@ function OfferCreatorPage() {
             alert("Typ pojazdu musi zostać wybrany!")
         }
 
+        try {
+            Number(uploadData.year);
+        } catch {
+            alert("Podany rok produkcji musi być liczbą!");
+        }
+
         const payload = {
             title: titleFieldData.value,
             description: descFieldData.value,
             pricePerDay: 150.00,
             vehicleType: uploadData.vehicleType,
-            productionYear: 2022,
+            productionYear: Number(uploadData.year),
             bodyType: "SUV",
-            fuelType: "DIESEL",
+            fuelType: uploadData.fuelType,
             model: { id: uploadData.modelId },
             images: [],
             city: "Warszawa",
