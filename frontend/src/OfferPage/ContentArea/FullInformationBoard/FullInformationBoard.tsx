@@ -6,6 +6,7 @@ import PaymentForm from "./PaymentComponent/PaymentForm";
 import { Icon } from '../../../Icons/Icon';
 import { useEffect, useState } from "react";
 import { validateDateRange } from "./dateValidator";
+import { useNavigate } from "react-router-dom";
 interface OfferImage {
     id: number;
     fileName: string;
@@ -60,6 +61,7 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
     });
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -91,7 +93,7 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
 
 
     const error = validateDateRange(startDate, endDate, paymentInfo.isComplete);
-    
+
     const hasImages = offer.images.length > 0;
 
     const images = offer.images.map(
@@ -126,8 +128,8 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
 
         return 1 + Math.round((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     };
-    
-    
+
+
 
     const createReservation = async () => {
         const payload = {
@@ -137,8 +139,13 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
             cardToken: "tok_example",
             cardLast4Digits: paymentInfo.last4Digits,
         };
-        
+
         const token = localStorage.getItem("jwtToken");
+
+        if (!token){
+            alert(`Błąd w tworzeniu rezerwacji.(Wymagane logowanie)`);
+            return;
+        }
 
         try {
             const response = await fetch("http://localhost:8080/api/reservation/request", {
@@ -151,10 +158,13 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
             });
 
             if (!response.ok) {
+                alert(`Błąd w tworzeniu rezerwacji.(Termin zajęty/Nie rezerwować własnego pojazdu)`);
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
             console.log("Reservation created:", data);
+            alert(`Wyłanono rezerwację na ${daysRent(startDate, endDate)} dni. \nŁączna kwota: ${daysRent(startDate, endDate) * offer.pricePerDay} PLN.`);
+            navigate(`/`);
         } catch (error) {
             console.error("Error creating reservation:", error);
         }
@@ -181,15 +191,15 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
                     </div>
                 )}
 
-                <InformationField 
-                    price={offer.pricePerDay} 
-                    fuelType={offer.fuelType} 
-                    make={offer.model.make.name} 
-                    model={offer.model.name} 
-                    productionYear={offer.productionYear} 
-                    vehicleType={offer.vehicleType} 
-                    bodyType={offer.bodyType} 
-                    city={offer.city} 
+                <InformationField
+                    price={offer.pricePerDay}
+                    fuelType={offer.fuelType}
+                    make={offer.model.make.name}
+                    model={offer.model.name}
+                    productionYear={offer.productionYear}
+                    vehicleType={offer.vehicleType}
+                    bodyType={offer.bodyType}
+                    city={offer.city}
                     address={offer.address} />
             </div>
             <div className="dual-holder-lower">
@@ -212,26 +222,25 @@ function FullInformationBoard({ offer }: { offer: Offer }) {
                             offer.active ? (
                                 <div>
                                     <h1>Potwierdzenie wyboru</h1>
-                                    <h2><DateSelect 
+                                    <h2><DateSelect
                                         label="Data początku"
                                         onChange={setStartDate} /></h2>
-                                    <h2><DateSelect 
-                                        label="Data końca" 
+                                    <h2><DateSelect
+                                        label="Data końca"
                                         onChange={setEndDate} /></h2>
-                                    
+
                                     <PaymentForm onChange={setPaymentInfo} paymentValue={((daysRent(startDate, endDate) || 0) * offer.pricePerDay)} />
                                     <h1>Czy na pewno chcesz wybrać tę ofertę?</h1>
-                                    <button 
-                                    className="accept-button" 
-                                    disabled={!!error} 
-                                    onClick={() => { 
+                                    <button
+                                    className="accept-button"
+                                    disabled={!!error}
+                                    onClick={() => {
                                             createReservation();
-                                            alert(`Wyłanono rezerwację na ${daysRent(startDate, endDate)} dni. \nŁączna kwota: ${daysRent(startDate, endDate) * offer.pricePerDay} PLN.`);
-                                            setShowModal(false); 
-                                        }} 
+                                            setShowModal(false);
+                                        }}
                                         > Tak </button>
-                                    
-                                    <button className="deny-button" onClick={() => 
+
+                                    <button className="deny-button" onClick={() =>
                                         setShowModal(false)
                                     }>Nie</button>
                                     {error && <p className="error">{error}</p>}
