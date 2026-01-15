@@ -101,7 +101,7 @@ function OfferCreatorPage() {
         }
 
         if (!uploadData.vehicleType) {
-            alert("Typ pojazdu musi zostać wybrany!")
+            alert("Typ pojazdu musi zostać wybrany!");
         }
 
         const payload = {
@@ -109,14 +109,15 @@ function OfferCreatorPage() {
             description: descFieldData.value,
             pricePerDay: priceFieldData.value,
             vehicleType: uploadData.vehicleType,
-            productionYear: uploadData.year,
-            bodyType: "Nie podano",
-            fuelType: uploadData.fuelType || "Nie podano",
+            productionYear: Number(uploadData.year),
+            bodyType: "SUV",
+            fuelType: uploadData.fuelType,
             model: { id: uploadData.modelId },
             images: [],
             city: cityField.value,
             address: addressField.value,
         };
+
 
         try {
             console.log("Tworzę ofertę...", payload);
